@@ -1,4 +1,4 @@
-<p style="text-align: center;"># wiki</p>
+<p style="text-align: center;">![Логотип](ссылка_на_картинку)</p>
 
 В
 
