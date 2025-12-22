@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статья в разработке - Википедия</title>
+    <style>
+        /* Общие стили Википедии */
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+            color: #202122;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        a {
+            color: #3366cc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Шапка Википедии */
+        .header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 0.5em 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        
+        .logo-text span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: normal;
+        }
+        
+        /* Основное содержимое */
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2em;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .develop-image {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 2em;
+        }
+        
+        .develop-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .develop-message {
+            background-color: white;
+            border: 1px solid #a2a9b1;
+            padding: 2em;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .develop-message h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            margin-top: 0;
+            margin-bottom: 1em;
+            color: #202122;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 0.5em;
+        }
+        
+        .develop-message p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5em;
+            color: #54595d;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #3366cc;
+            color: white;
+            padding: 0.75em 1.5em;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-top: 1em;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .back-link:hover {
+            background-color: #2a4b8d;
+            text-decoration: none;
+        }
+        
+        /* Подвал */
+        .footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #a2a9b1;
+            padding: 1.5em;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #54595d;
+            margin-top: 2em;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5em;
+            margin-bottom: 1em;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1em;
+            }
+            
+            .develop-message {
+                padding: 1.5em;
+            }
+            
+            .develop-message h1 {
+                font-size: 1.5rem;
+            }
+            
+            .develop-image {
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .develop-message h1 {
+                font-size: 1.3rem;
+            }
+            
+            .develop-message p {
+                font-size: 1rem;
+            }
+            
+            .footer-links {
+                gap: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="logo-container" id="wiki-logo">
+            <div class="logo">
+                <img src="images/logo.png" alt="Логотип Википедии">
+            </div>
+            <div class="logo-text">
+                Орден Вики
+                <span>Энциклопедия Ордена Торговцев</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Основное содержимое -->
+    <main class="main-container">
+        <div class="develop-image">
+            <img src="images/develop.png" alt="Статья в разработке">
+        </div>
+        
+        <div class="develop-message">
+            <h1>Ничего не найдено</h1>
+            <p>К сожалению, мы не нашли того, что вы искали.
+            Вы можете вернуться на главную страницу.</p>
+            
+            <a href="index.html" class="back-link">Вернуться на главную страницу</a>
+        </div>
+    </main>
+    
+    
+
+    <script>
+        // Обработка клика по логотипу
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('wiki-logo').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>

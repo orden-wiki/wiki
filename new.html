@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новый Орден Торговцев - Орден Вики</title>
+    <style>
+        /* Общие стили Википедии */
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+            color: #202122;
+            line-height: 1.6;
+        }
+        
+        a {
+            color: #3366cc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Шапка Википедии */
+        .header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 0.5em 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        
+        .logo-text span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: normal;
+        }
+        
+        /* Основная структура */
+        .container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 1em;
+        }
+        
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            background-color: white;
+            border: 1px solid #a2a9b1;
+            padding: 1.5em 2.5em;
+            max-width: 100%;
+        }
+        
+        .article-header {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 0.5em;
+            margin-bottom: 1.5em;
+        }
+        
+        .article-header h1 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            line-height: 1.3;
+        }
+        
+        .article-subtitle {
+            font-size: 0.875rem;
+            color: #54595d;
+            margin-top: 0.5em;
+        }
+        
+        /* Инфобокс */
+        .content-box {
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 1em;
+            margin: 1em 0;
+            float: right;
+            width: 300px;
+            margin-left: 1.5em;
+            font-size: 0.875rem;
+        }
+        
+        .content-box h2 {
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 0 0.5em 0;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid #a2a9b1;
+        }
+        
+        .info-image {
+            width: 100%;
+            margin-bottom: 0.5em;
+        }
+        
+        .info-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 0.3em;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            width: 40%;
+        }
+        
+        .info-value {
+            width: 60%;
+        }
+        
+        /* Стили для текста статьи */
+        p {
+            margin: 0.5em 0 1em 0;
+        }
+        
+        .quote {
+            font-style: italic;
+            margin: 1em 0;
+            padding: 0.5em 1em;
+            background-color: #f8f9fa;
+            border-left: 3px solid #a2a9b1;
+            color: #54595d;
+        }
+        
+        .quote cite {
+            display: block;
+            margin-top: 0.5em;
+            font-style: normal;
+            font-weight: bold;
+        }
+        
+        .section-image {
+            width: 100%;
+            max-width: 400px;
+            margin: 1em 0;
+        }
+        
+        .section-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* См. также */
+        .references {
+            font-size: 0.875rem;
+            margin-top: 2em;
+            border-top: 1px solid #a2a9b1;
+            padding-top: 1em;
+        }
+        
+        .references h2 {
+            font-size: 1.2rem;
+            cursor: default;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .content-box {
+                float: none;
+                width: 100%;
+                margin: 1em 0;
+            }
+            
+            .main-content {
+                padding: 1em;
+            }
+            
+            .container {
+                padding: 0.5em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="logo-container" id="wiki-logo">
+            <div class="logo">
+                <img src="images/logo.png" alt="Логотип Википедии">
+            </div>
+            <div class="logo-text">
+                Орден Вики
+                <span>Энциклопедия Ананаса</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Контейнер с контентом -->
+    <div class="container">
+        <!-- Основной контент -->
+        <main class="main-content">
+            <header class="article-header">
+                <h1>Новый Орден Торговцев</h1>
+            </header>
+            
+            <p><strong>Новый Орден Торговцев</strong> – это период реставрации <a href="old_orden.html">старого Ордена Торговцев</a>, когда Шкаф вновь вернулся к должности единоличного правителя всего Ордена.</p>
+            
+            <!-- Инфобокс -->
+            <div class="content-box">
+                <h2>Орден Торговцев</h2>
+                <div class="info-image">
+                    <img src="images/orden.png" alt="Орден Торговцев">
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Создан:</div>
+                    <div class="info-value">19 марта 2025</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Официальный язык:</div>
+                    <div class="info-value">русский</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Форма правления:</div>
+                    <div class="info-value">абсолютная монархия</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Государственный строй:</div>
+                    <div class="info-value">унитарное государство</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Правитель:</div>
+                    <div class="info-value"><a href="shkaf.html">Шкаф</a></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Участие в:</div>
+                    <div class="info-value"><a href="rock.html">RockCraft</a></div>
+                </div>
+            </div>
+            
+            <p>19 марта 2025 года <a href="shkaf.html">Шкаф</a> заявляет о восстановлении Ордена:</p>
+            
+            <div class="quote">
+                ❝ Я, Шкаф, воссоздаю Орден Торговцев. И мы будем восстанавливать свою культуру. 
+                (Кто желает присоединиться, пишите "за Орден")❞
+            </div>
+            
+            <div class="section-image">
+                <img src="images/new.png" alt="Создание Нового Ордена">
+            </div>
+            
+            <p>29 июня 2025 года состоялась свадьба Шкафа и Панды.</p>
+            
+            <div class="section-image">
+                <img src="images/wedding.png" alt="Свадьба Шкафа и Панды">
+            </div>
+            
+            <div class="references">
+                <h2>См. также</h2>
+                <ul>
+                    <li><a href="shkaf.html">Шкаф Первый Великий</a></li>
+                    <li><a href="old_orden.html">Первый Орден Торговцев</a></li>
+                    <li><a href="kitoboy_orden.html">Китобоевский Орден</a></li>
+                    <li><a href="orden.html">Орден Торговцев</a></li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    // Функция для проверки существования файла перед переходом по ссылке
+    function checkFileExists(url, callback) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('HEAD', url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 0 || xhr.status === 200) {
+                    callback(true);
+                } else {
+                    callback(false);
+                }
+            }
+        };
+        
+        try {
+            xhr.send();
+        } catch (e) {
+            callback(false);
+        }
+    }
+
+    // Обработка загрузки страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        // Обработка ссылки на логотип
+        document.getElementById('wiki-logo').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        // Обработка всех ссылок на странице
+        const links = document.querySelectorAll('a[href]');
+        
+        links.forEach(link => {
+            // Пропускаем внешние ссылки и якорные ссылки
+            const href = link.getAttribute('href');
+            if (href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
+                return;
+            }
+            
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetFile = this.getAttribute('href');
+                
+                checkFileExists(targetFile, function(exists) {
+                    if (exists) {
+                        window.location.href = targetFile;
+                    } else {
+                        window.location.href = 'develop.html';
+                    }
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>

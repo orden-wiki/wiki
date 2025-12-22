@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Орден Торговцев - Википедия</title>
+    <style>
+        /* Общие стили Википедии */
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+            color: #202122;
+            line-height: 1.6;
+        }
+        
+        a {
+            color: #3366cc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Шапка Википедии */
+        .header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 0.5em 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        
+        .logo-text span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: normal;
+        }
+        
+        .header-links {
+            display: flex;
+            gap: 1em;
+        }
+        
+        /* Основная навигация */
+        .main-nav {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 0 1em;
+            display: flex;
+            font-size: 0.875rem;
+        }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main-nav li {
+            padding: 0.5em 1em;
+        }
+        
+        .main-nav li.active {
+            background-color: white;
+            border: 1px solid #a2a9b1;
+            border-bottom: 1px solid white;
+            position: relative;
+            bottom: -1px;
+        }
+        
+        /* Основная структура */
+        .container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 1em;
+        }
+        
+        /* Боковая панель */
+        .sidebar {
+            width: 240px;
+            flex-shrink: 0;
+            font-size: 0.875rem;
+            margin-right: 1em;
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 1em;
+        }
+        
+        .sidebar h3 {
+            font-size: 0.875rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #54595d;
+            margin: 0.5em 0;
+            font-weight: bold;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar li {
+            padding: 0.25em 0;
+        }
+        
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            background-color: white;
+            border: 1px solid #a2a9b1;
+            padding: 1.5em 2.5em;
+            max-width: 100%;
+        }
+        
+        .article-header {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 0.5em;
+            margin-bottom: 1.5em;
+        }
+        
+        .article-header h1 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            line-height: 1.3;
+        }
+        
+        .article-subtitle {
+            font-size: 0.875rem;
+            color: #54595d;
+            margin-top: 0.5em;
+        }
+        
+        /* Инфобокс */
+        .content-box {
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 1em;
+            margin: 1em 0;
+            float: right;
+            width: 300px;
+            margin-left: 1.5em;
+            font-size: 0.875rem;
+        }
+        
+        .content-box h2 {
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 0 0.5em 0;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid #a2a9b1;
+        }
+        
+        .info-image {
+            width: 100%;
+            margin-bottom: 0.5em;
+        }
+        
+        .info-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 0.3em;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            width: 40%;
+        }
+        
+        .info-value {
+            width: 60%;
+        }
+        
+        /* Стили для текста статьи */
+        p {
+            margin: 0.5em 0 1em 0;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 0.3em;
+            margin-top: 1.5em;
+            margin-bottom: 0.7em;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h2 .toggle-icon {
+            font-size: 1rem;
+            color: #54595d;
+            margin-left: 10px;
+        }
+        
+        .collapsible-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .collapsed {
+            max-height: 0 !important;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+        }
+        
+        .section-image {
+            width: 100%;
+            max-width: 400px;
+            margin: 1em 0;
+        }
+        
+        .section-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Сноски и примечания */
+        .references {
+            font-size: 0.875rem;
+            margin-top: 2em;
+            border-top: 1px solid #a2a9b1;
+            padding-top: 1em;
+        }
+        
+        .references h2 {
+            font-size: 1.2rem;
+            cursor: default;
+        }
+        
+        .references h2 .toggle-icon {
+            display: none;
+        }
+        
+        /* Подвал */
+        .footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #a2a9b1;
+            margin-top: 2em;
+            padding: 1.5em;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #54595d;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5em;
+            margin-bottom: 1em;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .sidebar {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content-box {
+                float: none;
+                width: 100%;
+                margin: 1em 0;
+            }
+            
+            .main-content {
+                padding: 1em;
+            }
+            
+            .container {
+                padding: 0.5em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="logo-container" id="wiki-logo">
+            <div class="logo">
+                <img src="images/logo.png" alt="Логотип Википедии">
+            </div>
+            <div class="logo-text">
+                Орден Вики
+                <span>Энциклопедия Ананаса</span>
+            </div>
+        </div>
+    </header>
+   
+    
+    
+    <!-- Контейнер с контентом -->
+    <div class="container">
+        <!-- Основной контент -->
+        <main class="main-content">
+            <header class="article-header">
+                <h1>Орден Торговцев</h1>
+                
+            </header>
+            
+            <!-- Инфобокс -->
+            <div class="content-box">
+                <h2>Орден Торговцев</h2>
+                <div class="info-image">
+                    <img src="images/orden.png" alt="Орден Торговцев">
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Создан:</div>
+                    <div class="info-value"><a href="#" class="check-link" data-link="create.html">29 декабря 2024</a></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Периоды:</div>
+                    <div class="info-value">
+                        <a href="#" class="check-link" data-link="old_orden.html">Первый Орден Торговцев</a><br>
+                        <a href="#" class="check-link" data-link="kitoboy_orden.html">Китобоевский Орден</a><br>
+                        <a href="#" class="check-link" data-link="new.html">Новый Орден Торговцев</a>
+                        </div>
+                        </div>
+                <div class="info-row">
+                    <div class="info-label">Официальный язык:</div>
+                    <div class="info-value">русский</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Форма правления:</div>
+                    <div class="info-value">абсолютная монархия</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Государственный строй:</div>
+                    <div class="info-value">унитарное государство</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Правитель:</div>
+                    <div class="info-value"><a href="#" class="check-link" data-link="shkaf.html">Шкаф Первый Великий</a></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Участие в:</div>
+                    <div class="info-value">
+                        <a href="#" class="check-link" data-link="saf.html">SafCraft</a><br>
+                        <a href="#" class="check-link" data-link="rock.html">RockCraft</a>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Военные конфликты:</div>
+                    <div class="info-value">
+                        <a href="#" class="check-link" data-link="war.html">Война с Республикой</a><br>
+                        <a href="#" class="check-link" data-link="uwu.html">Война с Уву</a><br>
+                        <a href="#" class="check-link" data-link="shkaf.html">Взрывы Республики</a>
+                    </div>
+                </div>
+            </div>
+            
+            <p><strong>Орден Торговцев</strong> (или же просто Орден) – это государство созданное <a href="#" class="check-link" data-link="shkaf.html">Шкафом</a> на сервере SafCraft <a href="#" class="check-link" data-link="create.html">29 декабря 2024 года</a>.</p>
+            
+            <p>Сейчас Орден существует на сервере <a href="#" class="check-link" data-link="rock.html">RockCraft</a> (или же сервер Шкафа). Орден функционирует преимущественно в Телеграм и в Майнкрафт.</p>
+            
+            <h2>История <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h2>
+            <div class="collapsible-content">
+                <div class="section-image">
+                    <img src="images/history.png" alt="История Ордена">
+                </div>
+                
+                <h3>Создание Ордена и 1 сезон</h3>
+                <p><a href="#" class="check-link" data-link="create.html">29 декабря 2024 года</a> Шкаф создаёт Орден Торговцев на сервере <a href="#" class="check-link" data-link="saf.html">SafCraft</a>.</p>
+                <p>12 января 2025 года Республика <a href="#" class="check-link" data-link="war.html">нападает</a> на Орден Торговцев. Орден терпит поражение.</p>
+                
+                <h3>Раздел Ордена, начало 2 сезона</h3>
+                <p>В начале первого 2 сезона Орден разделился на 2 группировки: Трогаши под руководством Шкафа и Мокрые вантузы под руководством <a href="#" class="check-link" data-link="kitoboy.html">Китобоя</a>. Орден продолжал быть единым и Шкаф продолжал быть его лидером, но появляются предпосылки раздробленности.</p>
+                <p>Впервые к власти в Ордене подбирается Китобой, что в последствии, по мнению Шкафа приведёт к <a href="#" class="check-link" data-link="kitoboy_orden.html">захвату власти в Ордене Китобоем</a>.</p>
+                <p>Разделение оправдывалось развитием Ордена. Торгаши – оседлые мирные торговцы, в свою очередь Мокрые вантузы мобильные воины и разведчики.</p>
+                
+                <h3>Становление Китобоевского Ордена</h3>
+                <p>В начале второго 2 сезона разделение Ордена постепенно перестает играть роль. Орден стал жить вновь вместе и разделение стало формальностью.</p>
+                <p>4 февраля 2025 года Шкаф покидает Орден и сначала создаёт Мегаколис, а затем полностью покидает SafCraft. Правителем Ордена и главой обоих группировок Ордена становится Китобой. Позже он упраздняет деление Ордена на группировки. Начинается период <a href="#" class="check-link" data-link="kitoboy_orden.html">Китобоевского Ордена</a>.</p>
+                
+                <h3>Орден Павшего Ангела (ОПА)</h3>
+                <p>В начале 3 сезона – 3 марта 2025 года, Китобой переименовывает Орден Торговцев в <a href="#" class="check-link" data-link="kitoboy_orden.html">Орден Павшего Ангела</a>.</p>
+                <p>7 марта 2025 года Шкаф возвращается на SafCraft и вступает в ОПА. В Ордене устанавливается двоевластие. Но у Шкафа есть своя личная гвардия.</p>
+                <p>С 8 по 10 марта 2025 года Орден подвергается <a href="#" class="check-link" data-link="uwu.html">нападениям со стороны Уву</a>. Но несмотря на это Шкаф все же оправдывает его действия и даже принял Уву в Орден.</p>
+                <p>После того как Шкаф <a href="#" class="check-link" data-link="boom.html">взорвал Республику</a> его банят в SafCraft и он покидает ОПА.</p>
+                <p>В конце 3 сезона ОПА вступает во Всемирную империю. <a href="#" class="check-link" data-link="ananas.html">Ананас</a> из ОПА баллотируется в императоры, но проигрывает. Всемирная Империя долго не просуществовала и со временем полностью исчезла.</p>
+                
+                <h3>Реставрация Ордена</h3>
+                <p>19 марта 2025 года Шкаф заявляет о воссоздании Ордена Торговцев и создаёт Новый Орден Торговцев, который существует до сих пор.</p>
+                <p>В начале лета 2025 года <a href="#" class="check-link" data-link="kitoboy_orden.html">Китобоевский Орден</a> перестаёт существовать. Хотя Китобой пытался что-то сделать: он переименовывает ОПА обратно в Орден Торговцев и предлагает Ананасу стать правителем - Китобоевский Орден все равно перестаёт существовать.</p>
+                <p>10 декабря 2025 года Китобой возвращается к Шкафу.</p>
+            </div>
+            
+            <h2>Правители Ордена <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h2>
+            <div class="collapsible-content">
+                <p>Первым и действующим сейчас правителем является <a href="#" class="check-link" data-link="shkaf.html">Шкаф Первый Великий</a>.</p>
+                <p>Также правителем был <a href="#" class="check-link" data-link="kitoboy.html">Китобой</a> во время отсутствия Шкафа, по мнению Шкафа это являлось узурпацией власти.</p>
+                <p>На небольшой период, во время отсутствия Китобоя правителем был <a href="#" class="check-link" data-link="ananas.html">Ананас</a> – с 23 марта по 4 апреля 2025 года. Также Китобой предлагал Ананасу власть в своём Ордене 18 июня 2025 года, но Ананас покинул в этот день SAF Craft и перешёл в Сервер Шкафа.</p>
+            </div>
+            
+            <h2>Члены Ордена Торговцев за все время <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h2>
+            <div class="collapsible-content">
+                <div class="section-image">
+                    <img src="images/members.png" alt="Члены Ордена">
+                </div>
+            </div>
+            
+            <div class="references">
+                <h2>См. также <span class="toggle-icon"></span></h2>
+                <ul>
+                    <li><a href="#" class="check-link" data-link="kitoboy_orden.html">Китобоевский Орден</a></li>
+                    <li><a href="#" class="check-link" data-link="shkaf.html">Шкаф Первый Великий</a></li>
+                    <li><a href="#" class="check-link" data-link="kitoboy.html">Китобой</a></li>
+                    <li><a href="#" class="check-link" data-link="create.html">День рождения Ордена</a></li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    
+   
+    
+
+    <script>
+    // Функция для проверки существования файла перед переходом по ссылке (работает локально)
+    function checkFileExists(url, callback) {
+        // Для локальных файлов используем XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+        xhr.open('HEAD', url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 0 || xhr.status === 200) {
+                    // Файл существует или доступен
+                    callback(true);
+                } else {
+                    // Файл не найден или недоступен
+                    callback(false);
+                }
+            }
+        };
+        
+        try {
+            xhr.send();
+        } catch (e) {
+            // В случае ошибки считаем, что файла нет
+            callback(false);
+        }
+    }
+
+    // Обработка всех ссылок с классом check-link
+    document.addEventListener('DOMContentLoaded', function() {
+        // Обработка ссылки на логотип
+        document.getElementById('wiki-logo').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        // Обработка ссылок с проверкой существования файла
+        const checkLinks = document.querySelectorAll('.check-link');
+        
+        checkLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetFile = this.getAttribute('data-link');
+                
+                checkFileExists(targetFile, function(exists) {
+                    if (exists) {
+                        window.location.href = targetFile;
+                    } else {
+                        window.location.href = 'develop.html';
+                    }
+                });
+            });
+        });
+
+        // Сворачивание/разворачивание разделов
+        const sectionHeaders = document.querySelectorAll('h2');
+        
+        // Инициализация - сворачиваем все разделы
+        sectionHeaders.forEach(header => {
+            if (!header.closest('.references')) {
+                const content = header.nextElementSibling;
+                if (content && content.classList.contains('collapsible-content')) {
+                    content.classList.add('collapsed');
+                    const icon = header.querySelector('.toggle-icon i');
+                    if (icon) {
+                        icon.className = 'fas fa-chevron-right';
+                    }
+                }
+            }
+        });
+        
+        // Обработка кликов по заголовкам
+        sectionHeaders.forEach(header => {
+            if (!header.closest('.references')) {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    if (content && content.classList.contains('collapsible-content')) {
+                        const isCollapsed = content.classList.contains('collapsed');
+                        const icon = this.querySelector('.toggle-icon i');
+                        
+                        if (isCollapsed) {
+                            content.classList.remove('collapsed');
+                            if (icon) {
+                                icon.className = 'fas fa-chevron-down';
+                            }
+                        } else {
+                            content.classList.add('collapsed');
+                            if (icon) {
+                                icon.className = 'fas fa-chevron-right';
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

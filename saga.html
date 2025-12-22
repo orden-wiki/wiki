@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сага о Шкафе Великом - Орден Вики</title>
+    <style>
+        /* Общие стили Википедии */
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+            color: #202122;
+            line-height: 1.6;
+        }
+        
+        a {
+            color: #3366cc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Шапка Википедии */
+        .header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 0.5em 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        
+        .logo-text span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: normal;
+        }
+        
+        /* Основная структура */
+        .container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 1em;
+        }
+        
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            background-color: white;
+            border: 1px solid #a2a9b1;
+            padding: 1.5em 2.5em;
+            max-width: 100%;
+        }
+        
+        .article-header {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 0.5em;
+            margin-bottom: 1.5em;
+        }
+        
+        .article-header h1 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            line-height: 1.3;
+        }
+        
+        .article-subtitle {
+            font-size: 0.875rem;
+            color: #54595d;
+            margin-top: 0.5em;
+        }
+        
+        /* Инфобокс */
+        .content-box {
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 1em;
+            margin: 1em 0;
+            float: right;
+            width: 320px;
+            margin-left: 1.5em;
+            font-size: 0.875rem;
+        }
+        
+        .content-box h2 {
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 0 0.5em 0;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid #a2a9b1;
+        }
+        
+        .info-image {
+            width: 100%;
+            margin-bottom: 0.5em;
+        }
+        
+        .info-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 0.3em;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            width: 40%;
+        }
+        
+        .info-value {
+            width: 60%;
+        }
+        
+        /* Специальные стили для таблицы в инфобоксе */
+        .info-table {
+            width: 100%;
+            margin: 0.5em 0;
+            border-collapse: collapse;
+        }
+        
+        .info-table .center-text {
+            text-align: center;
+            font-weight: bold;
+            padding: 0.3em 0;
+            border-bottom: 1px solid #d0d0d0;
+        }
+        
+        .info-table .side {
+            width: 50%;
+            vertical-align: top;
+            padding: 0.3em;
+        }
+        
+        .info-table .flag-container {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+            height: 20px;
+            overflow: hidden;
+        }
+        
+        .info-table .flag {
+            height: 20px;
+            width: auto;
+            display: block;
+        }
+        
+        /* Стили для текста статьи */
+        p {
+            margin: 0.5em 0 1em 0;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 0.3em;
+            margin-top: 1.5em;
+            margin-bottom: 0.7em;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h2 .toggle-icon {
+            font-size: 1rem;
+            color: #54595d;
+            margin-left: 10px;
+        }
+        
+        .collapsible-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .collapsed {
+            max-height: 0 !important;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+        }
+        
+        .section-image {
+            width: 100%;
+            max-width: 400px;
+            margin: 1em 0;
+        }
+        
+        .section-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Стиль для списка персонажей */
+        .character-list {
+            list-style-type: none;
+            padding-left: 1.5em;
+        }
+        
+        .character-list li {
+            margin-bottom: 1em;
+            padding-left: 0.5em;
+            border-left: 3px solid #a2a9b1;
+        }
+        
+        .character-name {
+            font-weight: bold;
+            color: #202122;
+        }
+        
+        /* Примечание */
+        .note {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: #54595d;
+            margin: 0.5em 0;
+            padding: 0.5em;
+            background-color: #f8f9fa;
+            border-left: 3px solid #a2a9b1;
+        }
+        
+        /* Темы */
+        .themes-list {
+            list-style-type: none;
+            padding-left: 1em;
+        }
+        
+        .themes-list li {
+            margin-bottom: 0.8em;
+            padding-left: 0.5em;
+        }
+        
+        /* См. также */
+        .references {
+            font-size: 0.875rem;
+            margin-top: 2em;
+            border-top: 1px solid #a2a9b1;
+            padding-top: 1em;
+        }
+        
+        .references h2 {
+            font-size: 1.2rem;
+            cursor: default;
+        }
+        
+        .references h2 .toggle-icon {
+            display: none;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .content-box {
+                float: none;
+                width: 100%;
+                margin: 1em 0;
+            }
+            
+            .main-content {
+                padding: 1em;
+            }
+            
+            .container {
+                padding: 0.5em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="logo-container" id="wiki-logo">
+            <div class="logo">
+                <img src="images/logo.png" alt="Логотип Википедии">
+            </div>
+            <div class="logo-text">
+                Орден Вики
+                <span>Энциклопедия Ананаса</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Контейнер с контентом -->
+    <div class="container">
+        <!-- Основной контент -->
+        <main class="main-content">
+            <header class="article-header">
+                <h1>Сага о Шкафе Великом</h1>
+                </header>
+                <header class="article-header">
+                <p>Поэма представляет собой эпическое сказание о взлётах и падениях могущественного Ордена, неразрывно связанного с судьбой его правителя, Великого Шкафа.</p>
+            
+            <!-- Инфобокс -->
+            <div class="content-box">
+                <h2>Сага о Шкафе Великом</h2>
+                <div class="info-image">
+                    <img src="images/saga.jpg" alt="Сага о Шкафе Великом">
+                </div>
+                <div class="note">На фото первая страница Саги</div>
+                <div class="info-row">
+                    <div class="info-label">Жанр:</div>
+                    <div class="info-value">Героико-историческая эпическая поэма</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Автор:</div>
+                    <div class="info-value">Ананас (но написал ChatGPT)</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Язык оригинала:</div>
+                    <div class="info-value">русский</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Дата написания:</div>
+                    <div class="info-value">не помню</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Дата публикации:</div>
+                    <div class="info-value">5 октября 2025</div>
+                </div>
+                
+               
+            </div>
+            
+            <h2>Центральные персонажи <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h2>
+            <div class="collapsible-content">
+                <ul class="character-list">
+                    <li>
+                        <div class="character-name">Великий Шкаф</div>
+                        <p>Верховный правитель Ордена, главный герой саги. Изображается как мудрый, честный и харизматичный лидер, чья власть основана не на богатстве, а на уме и чести. Его путь полон испытаний: он переживает поражение, вынужденное разделение власти, добровольное отречение, изгнание и триумфальное возвращение. В итоге он находит истинное счастье не в битвах, а в мире, семье и гармонии.</p>
+                    </li>
+                    <li>
+                        <div class="character-name">Китобой</div>
+                        <p>Второй ключевой правитель Ордена, соратник (а позже — соправитель и оппонент) Шкафа. Получает часть власти для сохранения Ордена в трудный час. Изображается как способный, но, возможно, менее харизматичный лидер. В конечном счёте он устаёт от бремени власти, и его обвиняют в измене, хотя прямых доказательств этому в тексте нет.</p>
+                    </li>
+                    <li>
+                        <div class="character-name">Кактус</div>
+                        <p>Властный правитель враждебной Республики. После поражения и ухода он возвращается, чтобы возродить Республику в новом виде. Его действия (раскол, создание ФНГ, изгнание Уву) являются постоянным катализатором конфликтов для Ордена и Шкафа.</p>
+                    </li>
+                    <li>
+                        <div class="character-name">Уву</div>
+                        <p>Антагонист, появившийся в Республике. Необузданный, сильный и разрушительный воин, который сеет хаос. После изгнания Республикой он хитростью втирается в доверие к Шкафу, сеет ложь о Китобое и Республике, что в итоге приводит к масштабной войне и расколу между Шкафом и Китобоем. Олицетворяет коварство, силу и раздор.</p>
+                    </li>
+                    <li>
+                        <div class="character-name">Катерина и Ёж Михаил Шкафович</div>
+                        <p>Семья Шкафа, символизирующая его новую, мирную жизнь. Их появление знаменует переход героя от эпического пути воина и правителя к личному счастью и продолжению рода.</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <h2>Сюжет <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h2>
+            <div class="collapsible-content">
+                <h3>Пролог и Золотой век</h3>
+                <p>Введение в мир, где мудро правит Великий Шкаф.</p>
+                
+                <h3>Падение и Раздел</h3>
+                <p>Война с Республикой Кактуса наносит Ордену тяжёлое поражение. Чтобы сохранить наследие, Шкаф разделяет власть: одну часть оставляет себе, другую отдаёт Китобою.</p>
+                
+                <h3>Возрождение и Союз (ФНГ)</h3>
+                <p>После войны две ветви Ордена, сохраняя единство духа, начинают восстанавливаться. Республика Кактуса рушится, её остатки вместе с Державой образуют новый союз — ФНГ, который становится могущественной силой.</p>
+                
+                <h3>Отречение и Воссоединение</h3>
+                <p>Уставший Шкаф передаёт всю власть Китобою, и Орден формально воссоединяется. Однако без Шкафа он теряет свою прежнюю сущность («иным по сердцу стал»). Тем временем Кактус возрождает Республику, что ослабляет ФНГ, и тот распадается.</p>
+                
+                <h3>Возвращение и Двоевластие</h3>
+                <p>Ослабевший Орден зовёт Шкафа обратно. Тот возвращается и устанавливает равное правление с Китобоем, создавая прочный союз.</p>
+                
+                <h3>Интрига Уву и Раскол</h3>
+                <p>Появляется разрушительный воин Уву. Изгнанный Республикой, он обманом убеждает Шкафа в том, что Китобой и Республика виновны в его бедах. Поверив лжи, Шкаф в гневе разоряет Республику, а затем, обвинив в измене уже Китобоя, уводит верных сторонников в изгнание, создавая своё отдельное владение.</p>
+                
+                <h3>Закат Ордена и Новое Начало</h3>
+                <p>Орден под управлением Китобоя окончательно распадается. Сам Китобой теряет интерес к власти. Шкаф же в изгнании находит личное счастье с Катериной, и у них рождается наследник — Ёж Михаил. Он обретает покой вдали от прежних бурь.</p>
+                
+                <h3>Эпилог</h3>
+                <p>Сага завершается моралью о том, что, пройдя через войны и славу, истинное счастье герой обрёл в мире и семье. Его подвиги остаются в памяти народа, а в мире воцаряется долгожданный покой.</p>
+                
+                
+            </div>
+            
+            <h2>Основные темы <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h2>
+            <div class="collapsible-content">
+                <ul class="themes-list">
+                    <li><strong>Власть и её бремя:</strong> Мудрость vs усталость, разделение власти, ответственность.</li>
+                    <li><strong>Доверие и Предательство:</strong> Хрупкость союзов, сила клеветы (Уву), трагедия недоверия между бывшими соратниками (Шкаф и Китобой).</li>
+                    <li><strong>Война и Мир:</strong> Цикл разрушения и созидания, где финальная ценность отдаётся миру и гармонии.</li>
+                    <li><strong>Возрождение из Пепла:</strong> Орден и его лидеры неоднократно теряют всё, но находят силы начать заново — в иной форме или в ином месте.</li>
+                    <li><strong>Семья как итог пути:</strong> Эпический герой находит своё высшее предназначение не на троне, а в личном счастье и продолжении рода.</li>
+                </ul>
+                
+                
+            </div>
+            
+            <div class="references">
+                <h2>См. также</h2>
+                <ul>
+                    <li><a href="shkaf.html">Шкаф Первый Великий</a></li>
+                    <li><a href="war.html">Война с Республикой</a></li>
+                    <li><a href="uwu.html">Война с Уву</a></li>
+                    <li><a href="kitoboy.html">Китобой</a></li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    // Функция для проверки существования файла перед переходом по ссылке
+    function checkFileExists(url, callback) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('HEAD', url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 0 || xhr.status === 200) {
+                    callback(true);
+                } else {
+                    callback(false);
+                }
+            }
+        };
+        
+        try {
+            xhr.send();
+        } catch (e) {
+            callback(false);
+        }
+    }
+
+    // Обработка загрузки страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        // Обработка ссылки на логотип
+        document.getElementById('wiki-logo').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        // Обработка всех ссылок на странице
+        const checkLinks = document.querySelectorAll('a[href]');
+        
+        checkLinks.forEach(link => {
+            // Пропускаем внешние ссылки и якорные ссылки
+            const href = link.getAttribute('href');
+            if (href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
+                return;
+            }
+            
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetFile = this.getAttribute('href');
+                
+                checkFileExists(targetFile, function(exists) {
+                    if (exists) {
+                        window.location.href = targetFile;
+                    } else {
+                        window.location.href = 'develop.html';
+                    }
+                });
+            });
+        });
+
+        // Сворачивание/разворачивание разделов
+        const sectionHeaders = document.querySelectorAll('h2');
+        
+        // Инициализация - сворачиваем все разделы
+        sectionHeaders.forEach(header => {
+            if (!header.closest('.references')) {
+                const content = header.nextElementSibling;
+                if (content && content.classList.contains('collapsible-content')) {
+                    content.classList.add('collapsed');
+                    const icon = header.querySelector('.toggle-icon i');
+                    if (icon) {
+                        icon.className = 'fas fa-chevron-right';
+                    }
+                }
+            }
+        });
+        
+        // Обработка кликов по заголовкам
+        sectionHeaders.forEach(header => {
+            if (!header.closest('.references')) {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    if (content && content.classList.contains('collapsible-content')) {
+                        const isCollapsed = content.classList.contains('collapsed');
+                        const icon = this.querySelector('.toggle-icon i');
+                        
+                        if (isCollapsed) {
+                            content.classList.remove('collapsed');
+                            if (icon) {
+                                icon.className = 'fas fa-chevron-down';
+                            }
+                        } else {
+                            content.classList.add('collapsed');
+                            if (icon) {
+                                icon.className = 'fas fa-chevron-right';
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    });
+    </script>
+</body>
+</html>
