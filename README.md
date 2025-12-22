@@ -1,4 +1,4 @@
-<p style="text-align: center;">![Логотип](ссылка_на_картинку)</p>
+<p style="text-align: center;">![Логотип](images/logo.png)</p>
 
 В
 
