@@ -1,4 +1,4 @@
-# wiki
+<p style="text-align: center;"># wiki</p>
 
 В
 
