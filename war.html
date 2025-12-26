@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Война с Республикой - Орден Вики</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+            color: #202122;
+            line-height: 1.6;
+        }
+        
+        a {
+            color: #3366cc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 0.5em 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        
+        .logo-text span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: normal;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 1em;
+        }
+        
+        .main-content {
+            flex: 1;
+            background-color: white;
+            border: 1px solid #a2a9b1;
+            padding: 1.5em 2.5em;
+            max-width: 100%;
+        }
+        
+        .article-header {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 0.5em;
+            margin-bottom: 1.5em;
+        }
+        
+        .article-header h1 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            line-height: 1.3;
+        }
+        
+        .warning-message {
+            background-color: #fff8e1;
+            border: 1px solid #ffd54f;
+            border-left: 4px solid #ff9800;
+            padding: 1.5em;
+            margin: 2em 0;
+            border-radius: 3px;
+        }
+        
+        .warning-icon {
+            color: #ff9800;
+            font-size: 2rem;
+            margin-bottom: 0.5em;
+        }
+        
+        .warning-message h2 {
+            margin-top: 0;
+            color: #e65100;
+        }
+        
+        .back-button {
+            display: inline-block;
+            background-color: #3366cc;
+            color: white;
+            padding: 0.8em 1.5em;
+            border-radius: 3px;
+            text-decoration: none;
+            margin-top: 1em;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .back-button:hover {
+            background-color: #2952a3;
+            text-decoration: none;
+        }
+        
+        .back-button i {
+            margin-right: 0.5em;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1em;
+            }
+            
+            .container {
+                padding: 0.5em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container" id="wiki-logo">
+            <div class="logo">
+                <img src="images/logo.png" alt="Логотип Википедии">
+            </div>
+            <div class="logo-text">
+                Орден Вики
+                <span>Энциклопедия Ананаса</span>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <main class="main-content">
+            <header class="article-header">
+                <h1>Война с Республикой</h1>
+            </header>
+            
+            <div class="warning-message">
+                <div class="warning-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h2>Статья в процессе написания</h2>
+                <p>Эта страница находится в разработке. Информация о Войне с Республикой будет добавлена в ближайшее время.</p>
+                <p>Вы можете вернуться на главную страницу и ознакомиться с другими статьями нашей энциклопедии.</p>
+                
+                <button class="back-button" id="back-to-main">
+                    <i class="fas fa-home"></i> Вернуться на главную
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('wiki-logo').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+        
+        document.getElementById('back-to-main').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    });
+    </script>
+</body>
+</html>
