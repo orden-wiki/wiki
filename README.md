@@ -10,6 +10,8 @@
 
 ### В
 
+[Взрывы Республики](boom.html) 
+
 [Война с Республикой](war.html) 
 
 [Война с Уву](uwu.html) 
@@ -54,9 +56,18 @@
 [Постройки Ордена](build.html)
 
 
+### Р
+
+[Республика](republic.html)
+
+[RockCraft](rock.html)
+
+
 ### С
 
 [Сага о Шкафе Великом](saga)
+
+[SafCraft](saf.html) 
 
 
 ### Ш
