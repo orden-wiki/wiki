@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История Ордена: курс для новичков - Орден Вики</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+            color: #202122;
+            line-height: 1.6;
+        }
+        
+        a {
+            color: #3366cc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 0.5em 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        
+        .logo-text span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: normal;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 1em;
+        }
+        
+        .main-content {
+            flex: 1;
+            background-color: white;
+            border: 1px solid #a2a9b1;
+            padding: 1.5em 2.5em;
+            max-width: 100%;
+        }
+        
+        .article-header {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 0.5em;
+            margin-bottom: 1.5em;
+        }
+        
+        .article-header h1 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            line-height: 1.3;
+        }
+        
+        .content-box {
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 1em;
+            margin: 1em 0;
+            float: right;
+            width: 320px;
+            margin-left: 1.5em;
+            font-size: 0.875rem;
+        }
+        
+        .content-box h2 {
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 0 0.5em 0;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid #a2a9b1;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 0.3em;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            width: 40%;
+        }
+        
+        .info-value {
+            width: 60%;
+        }
+        
+        p {
+            margin: 0.5em 0 1em 0;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 0.3em;
+            margin-top: 1.5em;
+            margin-bottom: 0.7em;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h2 .toggle-icon {
+            font-size: 1rem;
+            color: #54595d;
+            margin-left: 10px;
+        }
+        
+        .collapsible-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .collapsed {
+            max-height: 0 !important;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+        }
+        
+        .character-list {
+            list-style-type: none;
+            padding-left: 1.5em;
+        }
+        
+        .character-list li {
+            margin-bottom: 1em;
+            padding-left: 0.5em;
+            border-left: 3px solid #a2a9b1;
+        }
+        
+        .character-name {
+            font-weight: bold;
+            color: #202122;
+        }
+        
+        .original-text {
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 1.5em;
+            margin: 1.5em 0;
+            border-radius: 3px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .original-text p {
+            margin: 0.8em 0;
+        }
+        
+        .references {
+            font-size: 0.875rem;
+            margin-top: 2em;
+            border-top: 1px solid #a2a9b1;
+            padding-top: 1em;
+        }
+        
+        .references h2 {
+            font-size: 1.2rem;
+            cursor: default;
+        }
+        
+        .references h2 .toggle-icon {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .content-box {
+                float: none;
+                width: 100%;
+                margin: 1em 0;
+            }
+            
+            .main-content {
+                padding: 1em;
+            }
+            
+            .container {
+                padding: 0.5em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container" id="wiki-logo">
+            <div class="logo">
+                <img src="images/logo.png" alt="Логотип Википедии">
+            </div>
+            <div class="logo-text">
+                Орден Вики
+                <span>Энциклопедия Ананаса</span>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <main class="main-content">
+            <header class="article-header">
+                <h1>История Ордена: курс для новичков</h1>
+            </header>
+            
+            <p><strong>История Ордена: курс для новичков</strong> — краткий экскурс в историю <a href="orden.html">Ордена</a> с целью познакомить новых членов сообщества с общей мифологией Ордена, его врагами, ключевыми событиями и, что важно, с психологическим портретом его лидера — <a href="shkaf.html">Шкафа</a>, объяснив его текущую осторожность и недоверие.</p>
+            
+            <div class="content-box">
+                <h2>История Ордена: курс для новичков</h2>
+                <div class="info-row">
+                    <div class="info-label">Жанр:</div>
+                    <div class="info-value">историческая справка</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Автор:</div>
+                    <div class="info-value"><a href="shkaf.html">Шкаф</a></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Язык оригинала:</div>
+                    <div class="info-value">русский</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Дата написания:</div>
+                    <div class="info-value">не знаю</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Дата публикации:</div>
+                    <div class="info-value">5 декабря 2025</div>
+                </div>
+            </div>
+            
+            <h2>Сюжет <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h2>
+            <div class="collapsible-content">
+                <h3>1. Создание и рост (1 сезон)</h3>
+                <p>Маленькая группа игроков ("Орден") быстро растёт, вызывая страх у соседей ("Республика", "Держава"). Нарастает напряжённость, дипломатические интриги ("подлости") и в итоге — открытая война с предательским нападением и ответным разрушением баз.</p>
+                
+                <h3>2. Раскол и перегруппировка (2 сезон)</h3>
+                <p>Внутренние конфликты (ссоры между лидерами Шкафом и Китобоем) приводят к разделению Ордена на две фракции ("торгаши" и "мокрые вантузы"). После ухода Шкафа и распада одной из фракций Орден собирается заново.</p>
+                
+                <h3>3. Конфликт с изгоем и изгнание (3 сезон)</h3>
+                <p>Орден, сменивший название, сталкивается с атаками спорного игрока UWU. Вернувшийся Шкаф создаёт тайную элитную "Гвардию", находит общий язык с изгоем UWU (вопреки мнению других) и, мстя за него, уничтожает базу Республики. После этого он покидает сервер ("сафкрафт") со своими верными сторонниками.</p>
+                
+                <h3>4. Новое начало и тень прошлого (Роккрафт)</h3>
+                <p>Шкаф создаёт собственный сервер ("Роккрафт"), где возрождает Орден. История приобретает более личный, почти трагический оттенок: описывается усталость лидера, его неспособность забыть прошлые предательства и потери, а также параноидальная осторожность (постоянный шпионаж со стороны старого врага Кактуса).</p>
+            </div>
+            
+            <h2>Ключевые персонажи <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h2>
+            <div class="collapsible-content">
+                <ul class="character-list">
+                    <li>
+                        <div class="character-name">Шкаф</div>
+                        <p>Основатель и харизматичный лидер Ордена. Представлен как стратег, верный своим принципам и союзникам (даже непопулярным, вроде UWU), но также как травмированный прошлыми конфликтами человек, несущий груз ответственности и воспоминаний.</p>
+                    </li>
+                    <li>
+                        <div class="character-name">Китобой и Пельмешка</div>
+                        <p>Соратники, ставшие причиной внутреннего раскола.</p>
+                    </li>
+                    <li>
+                        <div class="character-name">Кактус</div>
+                        <p>Лидер враждебной Республики, главный антагонист. Описывается как коварный, лицемерный (выдавал себя за союзника) и настойчивый враг, чья вражда пережила даже смену серверов.</p>
+                    </li>
+                    <li>
+                        <div class="character-name">UWU</div>
+                        <p>Противоречивая и, вероятно, скандальная фигура ("читер"), ставшая катализатором финального конфликта на старом сервере. Шкаф, встав на его защиту, демонстрирует независимость суждений.</p>
+                    </li>
+                    <li>
+                        <div class="character-name">Гвардия Мегаколис</div>
+                        <p>Элитное, тайное подразделение верных лично Шкафу игроков, символизирующее его власть и наличие преданного ядра.</p>
+                    </li>
+                    <li>
+                        <div class="character-name">Орден</div>
+                        <p>Главное "государство"-сообщество, судьба которого — центральная сюжетная линия.</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <h2>Читать оригинал текста <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h2>
+            <div class="collapsible-content">
+                <div class="original-text">
+                    <h3>1 сезон.</h3>
+                    <p>В один прекрасный день создался сервер сафкрафт. На этом сервере образовалось государство из 2, потом 3 человек. Оно быстро разрасталось в численности, и это пугало соседей таких как Республика и Держава. На протяжении сезона, Республика хоть и выдавала себя за союзника, делала подлости Ордену, например уничтожив спавнеры ифритов. Численность Ордена достигла приблизительно 10 человек. Республика заключила союз с Державой, с которой у Ордена были недопонимания и тёрки. Шкаф объявил военное положение, на что кактус бурно начал реагировать, пытаясь успокоить всех, даже явился на собрание Ордена. Ведь он понимал что мы являемся угрозой для них. Мы на тот момент уже строили форт, имели "мободробилку" и много собак. Хоть и не были богаты бронёй и оружием. Но в один день, когда весь Орден предложил вайп, то есть старт нового сезона, то Республика подло напала на Орден, пока почти никого не было и уничтожила базу. На что Орден дал ответ. Крипдейн своими героическими действиями дал некий отпор Республике, и позже уже с р192 уничтожил их базу. Конец 1 сезона.</p>
+                    
+                    <h3>2 сезон.</h3>
+                    <p>Орден сделал базу в деревне и начал более эффективно развиваться, имел большую силу, но у Шкафа происходили ссоры с Китобоем и пельмешкой. Орден так же к началу второго сезона был поделён на 2 части. Торгаши - под предводительством Шкафа и мокрые вантузы - под предводительством Китобоя. Шло время, Шкаф на время ушёл с Ордена вместе с р192, так же вантузы распались, Орден собрался заново. Конец 2 сезона.</p>
+                    
+                    <h3>3 сезон.</h3>
+                    <p>Через время, когда Орден меняет название на Орден Падшего Ангела (старое название Орден торговцев) и начинают страдать под атаками UWU, который являлся персоной с самым разным мнением о нём. Вернувшись, Шкаф создал гвардию Мегаколис, которая была ответвлением Ордена. Она жила тайно в пещере, её участники - самые верные Шкафу люди. Позже к ним примыкает Ананас. Шкаф находит общий язык с UWU и даёт своеобразную поддержку, так же предупредив о плане попытки его уничтожения Республикой. Все считали его плохим и читером, и его забанили. Но Шкаф иного мнения. Через время, мстя за нового друга своего - UWU он отправляется на базу республики и взрывает её, забирая часть ресурсов, и покидает сафкрафт, уводя с собой мегаколис и его гвардейцев.</p>
+                    
+                    <h3>Роккрафт (ранее меланхолившкаф)</h3>
+                    <p>Шкаф создаёт свой сервер, где возрождает Орден. Проходит несколько сезонов спокойной жизни, приходит Император с своими намерениями сделать Орден великим, но до сих пор ничего не изменилось. Шкаф до сих пор живёт с оглядкой на прошлое, он потерял многое и многих, он не может забыть своих товарищей и не может простить предателей. И до сих пор Кактус шпионит за Шкафом и Орденом.</p>
+                    
+                    <p>Конец.</p>
+                </div>
+            </div>
+            
+            <div class="references">
+                <h2>См. также</h2>
+                <ul>
+                    <li><a href="orden.html">Орден Торговцев</a></li>
+                    <li><a href="shkaf.html">Шкаф Первый Великий</a></li>
+                    <li><a href="rock.html">RockCraft</a></li>
+                    <li><a href="kitoboy.html">Китобой</a></li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    function checkFileExists(url, callback) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('HEAD', url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 0 || xhr.status === 200) {
+                    callback(true);
+                } else {
+                    callback(false);
+                }
+            }
+        };
+        
+        try {
+            xhr.send();
+        } catch (e) {
+            callback(false);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('wiki-logo').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        const checkLinks = document.querySelectorAll('a[href]');
+        
+        checkLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
+                return;
+            }
+            
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetFile = this.getAttribute('href');
+                
+                checkFileExists(targetFile, function(exists) {
+                    if (exists) {
+                        window.location.href = targetFile;
+                    } else {
+                        window.location.href = 'develop.html';
+                    }
+                });
+            });
+        });
+
+        const sectionHeaders = document.querySelectorAll('h2');
+        
+        sectionHeaders.forEach(header => {
+            if (!header.closest('.references')) {
+                const content = header.nextElementSibling;
+                if (content && content.classList.contains('collapsible-content')) {
+                    content.classList.add('collapsed');
+                    const icon = header.querySelector('.toggle-icon i');
+                    if (icon) {
+                        icon.className = 'fas fa-chevron-right';
+                    }
+                }
+            }
+        });
+        
+        sectionHeaders.forEach(header => {
+            if (!header.closest('.references')) {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    if (content && content.classList.contains('collapsible-content')) {
+                        const isCollapsed = content.classList.contains('collapsed');
+                        const icon = this.querySelector('.toggle-icon i');
+                        
+                        if (isCollapsed) {
+                            content.classList.remove('collapsed');
+                            if (icon) {
+                                icon.className = 'fas fa-chevron-down';
+                            }
+                        } else {
+                            content.classList.add('collapsed');
+                            if (icon) {
+                                icon.className = 'fas fa-chevron-right';
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    });
+    </script>
+</body>
+</html>
