@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Орден Вики - Главная</title>
+    <style>
+        /* Общие стили */
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+            color: #202122;
+            line-height: 1.6;
+            background-image: linear-gradient(to bottom, #f8f9fa, #e6e9ef);
+            min-height: 100vh;
+        }
+        
+        a {
+            color: #3366cc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Шапка сайта */
+        .header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 1em 1.5em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            line-height: 1.2;
+            color: #202122;
+        }
+        
+        .logo-text span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: #54595d;
+        }
+        
+        /* Поисковая строка */
+        .search-container {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 2em;
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 0.8em 1em 0.8em 3.5em;
+            font-size: 1rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            background-color: white;
+            background-image: url('images/search.png');
+            background-size: 20px;
+            background-position: 1em center;
+            background-repeat: no-repeat;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #3366cc;
+            box-shadow: 0 0 0 3px rgba(51, 102, 204, 0.2);
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 1px solid #a2a9b1;
+            border-top: none;
+            border-radius: 0 0 2px 2px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .search-result-item {
+            padding: 0.8em 1em;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .search-result-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .search-result-title {
+            font-weight: bold;
+            color: #202122;
+            margin-bottom: 0.2em;
+        }
+        
+        .search-result-letter {
+            font-size: 0.9rem;
+            color: #54595d;
+            text-transform: uppercase;
+        }
+        
+        .no-results {
+            padding: 1.5em;
+            text-align: center;
+            color: #54595d;
+            font-style: italic;
+        }
+        
+        .no-results-image {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1em;
+        }
+        
+        .no-results-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0.7;
+        }
+        
+        /* Основной контент */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2em;
+        }
+        
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3em;
+            padding: 2em;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #202122;
+            margin-bottom: 0.5em;
+        }
+        
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: #54595d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Алфавитный указатель */
+        .alphabet-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5em;
+            margin-bottom: 2em;
+            padding: 1em;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .alphabet-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            color: #3366cc;
+            border: 1px solid #a2a9b1;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .alphabet-link:hover {
+            background-color: #3366cc;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .alphabet-link.has-articles {
+            border-color: #3366cc;
+            background-color: #f8f9fa;
+        }
+        
+        /* Статьи по алфавиту */
+        .articles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5em;
+            margin-bottom: 3em;
+        }
+        
+        .letter-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5em;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .letter-header {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #202122;
+            padding-bottom: 0.5em;
+            margin-bottom: 1em;
+            border-bottom: 2px solid #3366cc;
+        }
+        
+        .article-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .article-item {
+            padding: 0.7em 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .article-item:last-child {
+            border-bottom: none;
+        }
+        
+        .article-link {
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.5em;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .article-link:hover {
+            background-color: #f8f9fa;
+            text-decoration: none;
+        }
+        
+        /* Статистика */
+        .stats-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2em;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-top: 2em;
+        }
+        
+        .stats-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #202122;
+            margin-bottom: 1em;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5em;
+        }
+        
+        .stat-item {
+            padding: 1em;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3366cc;
+            margin-bottom: 0.5em;
+        }
+        
+        .stat-label {
+            color: #54595d;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 1em;
+            }
+            
+            .logo-container {
+                margin-bottom: 1em;
+            }
+            
+            .search-container {
+                margin: 0;
+                width: 100%;
+            }
+            
+            .main-content {
+                padding: 1em;
+            }
+            
+            .articles-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .alphabet-nav {
+                gap: 0.3em;
+            }
+            
+            .alphabet-link {
+                width: 35px;
+                height: 35px;
+                line-height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .welcome-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта с поиском -->
+    <header class="header">
+        <div class="logo-container" id="wiki-logo">
+            <div class="logo">
+                <img src="images/logo.png" alt="Логотип Орден Вики">
+            </div>
+            <div class="logo-text">
+                Орден Вики
+                <span>Энциклопедия Ананаса</span>
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" id="search-box" placeholder="Поиск по вики...">
+            <div class="search-results" id="search-results">
+                <!-- Результаты поиска будут появляться здесь -->
+            </div>
+        </div>
+    </header>
+    
+    <!-- Основной контент -->
+    <main class="main-content">
+        <!-- Приветственная секция -->
+        <section class="welcome-section">
+            <h1 class="welcome-title">Добро пожаловать в Орден Вики!</h1>
+            
+        </section>
+        
+        <!-- Алфавитный указатель -->
+        <nav class="alphabet-nav" id="alphabet-nav">
+            <!-- Буквы будут добавлены через JavaScript -->
+        </nav>
+        
+        <!-- Статьи по алфавиту -->
+        <div class="articles-container" id="articles-container">
+            <!-- Статьи будут загружены через JavaScript -->
+        </div>
+        
+        
+    </main>
+
+    <script>
+        // Данные статей из README.md
+        const articles = [
+            // А
+            { title: "Ананас", letter: "А", link: "ananas.html" },
+            
+            // В
+            { title: "Взрывы Республики", letter: "В", link: "boom.html" },
+            { title: "Война с Республикой", letter: "В", link: "war.html" },
+            { title: "Война с Уву", letter: "В", link: "uwu.html" },
+            
+            // Г
+            { title: "Галерея изображений", letter: "Г", link: "gallery.html" },
+            
+            // Д
+            { title: "День Ордена", letter: "Д", link: "create.html" },
+            
+            // И
+            { title: "История Ордена: курс для новичков", letter: "И", link: "history.html" },
+            
+            // К
+            { title: "Китобой", letter: "К", link: "kitoboy.html" },
+            { title: "Китобоевский Орден", letter: "К", link: "kitoboy_orden.html" },
+            
+            // Н
+            { title: "Новый Орден Торговцев", letter: "Н", link: "new.html" },
+            
+            // О
+            { title: "Орден Торговцев", letter: "О", link: "orden.html" },
+            
+            // П
+            { title: "Первый Орден Торговцев", letter: "П", link: "old_orden.html" },
+            { title: "Постройки Ордена", letter: "П", link: "build.html" },
+            
+            // Р
+            { title: "Республика", letter: "Р", link: "republic.html" },
+            { title: "RockCraft", letter: "Р", link: "rock.html" },
+            
+            // С
+            { title: "Сага о Шкафе Великом", letter: "С", link: "saga.html" },
+            { title: "SafCraft", letter: "С", link: "saf.html" },
+            
+            // Ш
+            { title: "Шкаф Первый Великий", letter: "Ш", link: "shkaf.html" }
+        ];
+        
+        // Русский алфавит
+        const russianAlphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+        
+        // Функция для проверки существования файла
+        function checkFileExists(url, callback) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('HEAD', url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 0 || xhr.status === 200) {
+                        callback(true);
+                    } else {
+                        callback(false);
+                    }
+                }
+            };
+            
+            try {
+                xhr.send();
+            } catch (e) {
+                callback(false);
+            }
+        }
+        
+        // Функция для создания алфавитной навигации
+        function createAlphabetNav() {
+            const alphabetNav = document.getElementById('alphabet-nav');
+            const lettersWithArticles = new Set(articles.map(article => article.letter));
+            
+            for (let letter of russianAlphabet) {
+                const link = document.createElement('a');
+                link.href = `#letter-${letter}`;
+                link.className = 'alphabet-link';
+                link.textContent = letter;
+                
+                if (lettersWithArticles.has(letter)) {
+                    link.classList.add('has-articles');
+                }
+                
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetLetter = this.textContent;
+                    const targetElement = document.getElementById(`letter-${targetLetter}`);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+                
+                alphabetNav.appendChild(link);
+            }
+        }
+        
+        // Функция для группировки статей по буквам
+        function groupArticlesByLetter() {
+            const grouped = {};
+            
+            articles.forEach(article => {
+                const letter = article.letter;
+                if (!grouped[letter]) {
+                    grouped[letter] = [];
+                }
+                grouped[letter].push(article);
+            });
+            
+            return grouped;
+        }
+        
+        // Функция для создания списка статей
+        function createArticlesList() {
+            const articlesContainer = document.getElementById('articles-container');
+            const groupedArticles = groupArticlesByLetter();
+            
+            // Сортируем буквы по алфавиту
+            const sortedLetters = Object.keys(groupedArticles).sort();
+            
+            sortedLetters.forEach(letter => {
+                const letterSection = document.createElement('div');
+                letterSection.className = 'letter-section';
+                letterSection.id = `letter-${letter}`;
+                
+                const letterHeader = document.createElement('h2');
+                letterHeader.className = 'letter-header';
+                letterHeader.textContent = letter;
+                
+                const articleList = document.createElement('ul');
+                articleList.className = 'article-list';
+                
+                // Сортируем статьи по названию
+                groupedArticles[letter].sort((a, b) => a.title.localeCompare(b.title));
+                
+                groupedArticles[letter].forEach(article => {
+                    const articleItem = document.createElement('li');
+                    articleItem.className = 'article-item';
+                    
+                    const articleLink = document.createElement('a');
+                    articleLink.className = 'article-link';
+                    articleLink.textContent = article.title;
+                    articleLink.href = article.link;
+                    
+                    // Проверяем существование файла
+                    articleLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetFile = this.getAttribute('href');
+                        
+                        checkFileExists(targetFile, function(exists) {
+                            if (exists) {
+                                window.location.href = targetFile;
+                            } else {
+                                window.location.href = 'develop.html';
+                            }
+                        });
+                    });
+                    
+                    articleItem.appendChild(articleLink);
+                    articleList.appendChild(articleItem);
+                });
+                
+                letterSection.appendChild(letterHeader);
+                letterSection.appendChild(articleList);
+                articlesContainer.appendChild(letterSection);
+            });
+        }
+        
+        // Функция для создания статистики
+        function createStats() {
+            const statsGrid = document.getElementById('stats-grid');
+            
+            const stats = [
+                { number: articles.length, label: "Всего статей" },
+                { number: new Set(articles.map(a => a.letter)).size, label: "Задействовано букв" },
+                { number: Math.floor(articles.length / 3), label: "Ключевых событий" },
+                { number: 2, label: "Серверов описано" }
+            ];
+            
+            stats.forEach(stat => {
+                const statItem = document.createElement('div');
+                statItem.className = 'stat-item';
+                
+                const statNumber = document.createElement('div');
+                statNumber.className = 'stat-number';
+                statNumber.textContent = stat.number;
+                
+                const statLabel = document.createElement('div');
+                statLabel.className = 'stat-label';
+                statLabel.textContent = stat.label;
+                
+                statItem.appendChild(statNumber);
+                statItem.appendChild(statLabel);
+                statsGrid.appendChild(statItem);
+            });
+        }
+        
+        // Функция для поиска статей
+        function searchArticles(query) {
+            const searchResults = document.getElementById('search-results');
+            
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+            
+            const normalizedQuery = query.toLowerCase().trim();
+            const results = articles.filter(article => 
+                article.title.toLowerCase().includes(normalizedQuery)
+            );
+            
+            searchResults.innerHTML = '';
+            
+            if (results.length === 0) {
+                // Показать "ничего не найдено"
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'no-results-image';
+                
+                const image = document.createElement('img');
+                image.src = 'images/develop.png';
+                image.alt = 'Ничего не найдено';
+                
+                imageContainer.appendChild(image);
+                noResults.appendChild(imageContainer);
+                
+                const message = document.createElement('p');
+                message.textContent = `По запросу "${query}" ничего не найдено`;
+                noResults.appendChild(message);
+                
+                searchResults.appendChild(noResults);
+            } else {
+                // Показать результаты
+                results.forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    
+                    resultItem.addEventListener('click', function() {
+                        checkFileExists(result.link, function(exists) {
+                            if (exists) {
+                                window.location.href = result.link;
+                            } else {
+                                window.location.href = 'develop.html';
+                            }
+                        });
+                    });
+                    
+                    const title = document.createElement('div');
+                    title.className = 'search-result-title';
+                    title.textContent = result.title;
+                    
+                    const letter = document.createElement('div');
+                    letter.className = 'search-result-letter';
+                    letter.textContent = `Раздел: ${result.letter}`;
+                    
+                    resultItem.appendChild(title);
+                    resultItem.appendChild(letter);
+                    searchResults.appendChild(resultItem);
+                });
+            }
+            
+            searchResults.style.display = 'block';
+        }
+        
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработка клика по логотипу
+            document.getElementById('wiki-logo').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+            
+            // Создаем алфавитную навигацию
+            createAlphabetNav();
+            
+            // Создаем список статей
+            createArticlesList();
+            
+            // Создаем статистику
+            createStats();
+            
+            // Обработка поиска
+            const searchBox = document.getElementById('search-box');
+            const searchResults = document.getElementById('search-results');
+            
+            searchBox.addEventListener('input', function() {
+                searchArticles(this.value);
+            });
+            
+            // Скрываем результаты поиска при клике вне поисковой строки
+            document.addEventListener('click', function(e) {
+                if (!searchBox.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.style.display = 'none';
+                }
+            });
+            
+            // Обработка нажатия клавиш в поиске
+            searchBox.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && this.value.length >= 2) {
+                    const results = articles.filter(article => 
+                        article.title.toLowerCase().includes(this.value.toLowerCase().trim())
+                    );
+                    
+                    if (results.length > 0) {
+                        checkFileExists(results[0].link, function(exists) {
+                            if (exists) {
+                                window.location.href = results[0].link;
+                            } else {
+                                window.location.href = 'develop.html';
+                            }
+                        });
+                    }
+                }
+            });
+            
+            // Обработка всех ссылок на странице
+            const links = document.querySelectorAll('a[href]');
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.includes('.html') && !href.startsWith('#')) {
+                    link.addEventListener('click', function(e) {
+                        if (this.getAttribute('href') !== '#') {
+                            e.preventDefault();
+                            const targetFile = this.getAttribute('href');
+                            
+                            checkFileExists(targetFile, function(exists) {
+                                if (exists) {
+                                    window.location.href = targetFile;
+                                } else {
+                                    window.location.href = 'develop.html';
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
