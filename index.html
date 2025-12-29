@@ -584,10 +584,9 @@
             const statsGrid = document.getElementById('stats-grid');
             
             const stats = [
-                { number: articles.length, label: "Всего статей" },
-                { number: new Set(articles.map(a => a.letter)).size, label: "Задействовано букв" },
-                { number: Math.floor(articles.length / 3), label: "Ключевых событий" },
-                { number: 2, label: "Серверов описано" }
+                { number: articles.length, label: "Всего статей" }
+    
+                
             ];
             
             stats.forEach(stat => {
