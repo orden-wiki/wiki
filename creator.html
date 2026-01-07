@@ -686,10 +686,12 @@ document.addEventListener('DOMContentLoaded',function(){
 
     headers.forEach(h2 => {
         if(!h2.querySelector('.toggle-icon')){
-            h2.innerHTML += ' <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>';
+            // ИЗМЕНЕНИЕ 1: Иконка сразу смотрит вправо (chevron-right)
+            h2.innerHTML += ' <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>';
         }
         const contentDiv = document.createElement('div');
-        contentDiv.className = 'collapsible-content';
+        // ИЗМЕНЕНИЕ 2: Добавлен класс 'collapsed' по умолчанию
+        contentDiv.className = 'collapsible-content collapsed';
         h2.parentNode.insertBefore(contentDiv, h2.nextSibling);
 
         let next = contentDiv.nextSibling;
@@ -717,6 +719,7 @@ document.addEventListener('DOMContentLoaded',function(){
         });
     });
 });
+
 <\/script></body></html>`;
 
             window.onbeforeunload = null;
