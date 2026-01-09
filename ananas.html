@@ -1,200 +1,146 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ананас - Орден Вики</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        }
-        
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #f6f6f6;
-            color: #202122;
-            line-height: 1.6;
-        }
-        
-        a {
-            color: #3366cc;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        .header {
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #a2a9b1;
-            padding: 0.5em 1em;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.875rem;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        
-        .logo {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-        }
-        
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        
-        .logo-text {
-            font-size: 1.25rem;
-            font-weight: bold;
-            line-height: 1.2;
-        }
-        
-        .logo-text span {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: normal;
-        }
-        
-        .container {
-            display: flex;
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 1em;
-        }
-        
-        .main-content {
-            flex: 1;
-            background-color: white;
-            border: 1px solid #a2a9b1;
-            padding: 1.5em 2.5em;
-            max-width: 100%;
-        }
-        
-        .article-header {
-            border-bottom: 1px solid #a2a9b1;
-            padding-bottom: 0.5em;
-            margin-bottom: 1.5em;
-        }
-        
-        .article-header h1 {
-            font-size: 1.875rem;
-            font-weight: bold;
-            margin: 0;
-            padding: 0;
-            line-height: 1.3;
-        }
-        
-        .warning-message {
-            background-color: #fff8e1;
-            border: 1px solid #ffd54f;
-            border-left: 4px solid #ff9800;
-            padding: 1.5em;
-            margin: 2em 0;
-            border-radius: 3px;
-        }
-        
-        .warning-icon {
-            color: #ff9800;
-            font-size: 2rem;
-            margin-bottom: 0.5em;
-        }
-        
-        .warning-message h2 {
-            margin-top: 0;
-            color: #e65100;
-        }
-        
-        .back-button {
-            display: inline-block;
-            background-color: #3366cc;
-            color: white;
-            padding: 0.8em 1.5em;
-            border-radius: 3px;
-            text-decoration: none;
-            margin-top: 1em;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            font-family: inherit;
-        }
-        
-        .back-button:hover {
-            background-color: #2952a3;
-            text-decoration: none;
-        }
-        
-        .back-button i {
-            margin-right: 0.5em;
-        }
-        
-        @media (max-width: 768px) {
-            .main-content {
-                padding: 1em;
-            }
-            
-            .container {
-                padding: 0.5em;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <header class="header">
-        <div class="logo-container" id="wiki-logo">
-            <div class="logo">
-                <img src="images/logo.png" alt="Логотип Википедии">
-            </div>
-            <div class="logo-text">
-                Орден Вики
-                <span>Энциклопедия Ананаса</span>
-            </div>
-        </div>
-    </header>
-    
-    <div class="container">
-        <main class="main-content">
-            <header class="article-header">
-                <h1>Ананас</h1>
-            </header>
-            
-            <div class="warning-message">
-                <div class="warning-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <h2>Статья в процессе написания</h2>
-                <p>Эта страница находится в разработке. Информация об Ананасе будет добавлена в ближайшее время.</p>
-                <p>Вы можете вернуться на главную страницу и ознакомиться с другими статьями нашей энциклопедии.</p>
-                
-                <button class="back-button" id="back-to-main">
-                    <i class="fas fa-home"></i> Вернуться на главную
-                </button>
-            </div>
-        </main>
-    </div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('wiki-logo').addEventListener('click', function() {
-            window.location.href = 'index.html';
-        });
-        
-        document.getElementById('back-to-main').addEventListener('click', function() {
-            window.location.href = 'index.html';
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ананас - Орден Вики</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><style>
+* { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+body { margin: 0; padding: 0; background-color: #f6f6f6; color: #202122; line-height: 1.6; }
+a { color: #3366cc; text-decoration: none; } a:hover { text-decoration: underline; }
+.header { background-color: #f8f9fa; border-bottom: 1px solid #a2a9b1; padding: 0.5em 1em; display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; }
+.logo-container { display: flex; align-items: center; cursor: pointer; }
+.logo { width: 40px; height: 40px; margin-right: 10px; } .logo img { width: 100%; height: 100%; object-fit: contain; }
+.logo-text { font-size: 1.25rem; font-weight: bold; line-height: 1.2; } .logo-text span { display: block; font-size: 0.75rem; font-weight: normal; }
+.container { display: flex; max-width: 1600px; margin: 0 auto; padding: 1em; }
+.main-content { flex: 1; background-color: white; border: 1px solid #a2a9b1; padding: 1.5em 2.5em; max-width: 100%; }
+.article-header { border-bottom: 1px solid #a2a9b1; padding-bottom: 0.5em; margin-bottom: 1.5em; }
+.article-header h1 { font-size: 1.875rem; font-weight: bold; margin: 0; padding: 0; line-height: 1.3; }
+.content-box { background-color: #f8f9fa; border: 1px solid #a2a9b1; padding: 1em; margin: 1em 0; float: right; width: 320px; margin-left: 1.5em; font-size: 0.875rem; }
+.content-box h2 { font-size: 1rem; font-weight: bold; text-align: center; margin: 0 0 0.5em 0; padding-bottom: 0.3em; border-bottom: 1px solid #a2a9b1; }
+.info-image { width: 100%; margin-bottom: 0.5em; } .info-image img { width: 100%; height: auto; display: block; }
+.info-row { display: flex; margin-bottom: 0.3em; } .info-label { font-weight: bold; width: 40%; } .info-value { width: 60%; }
+.flag-container { display: inline-block; vertical-align: middle; margin-right: 5px; height: 20px; } .flag { height: 20px; width: auto; }
+p { margin: 0.5em 0 1em 0; }
+h2 { font-size: 1.5rem; font-weight: normal; border-bottom: 1px solid #a2a9b1; padding-bottom: 0.3em; margin-top: 1.5em; margin-bottom: 0.7em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+h2 .toggle-icon { font-size: 1rem; color: #54595d; margin-left: 10px; }
+.collapsible-content { overflow: hidden; transition: max-height 0.3s ease-out; } .collapsed { max-height: 0 !important; }
+h3 { font-size: 1.2rem; font-weight: bold; margin-top: 1.2em; margin-bottom: 0.5em; }
+.section-image { width: 100%; max-width: 400px; margin: 1em 0; } .section-image img { width: 100%; height: auto; display: block; }
+.note { font-size: 0.8rem; font-style: italic; color: #54595d; margin: 0.5em 0; padding: 0.5em; background-color: #f8f9fa; border-left: 3px solid #a2a9b1; }
+.references { font-size: 0.875rem; margin-top: 2em; border-top: 1px solid #a2a9b1; padding-top: 1em; }
+.references h2 { font-size: 1.2rem; cursor: default; } .references h2 .toggle-icon { display: none; }
+/* Новые стили блоков */
+.site-container { margin: 1em 0; border: 1px solid #a2a9b1; background-color: #f8f9fa; padding: 10px; } .site-container iframe { width: 100%; height: 400px; border: none; }
+.original-text { background-color: #f8f9fa; border: 1px solid #a2a9b1; padding: 1.5em; margin: 1.5em 0; border-radius: 3px; font-size: 0.95rem; line-height: 1.5; }
+.quote-box { font-size: 1rem; color: #4a4a4a; margin: 1em 0; padding: 1em 2em; background-color: #fdfdfd; border-left: 4px solid #a2a9b1; }
+.quote-symbol-left { font-size: 2em; line-height: 0; vertical-align: sub; margin-right: 5px; color: #a2a9b1; }
+.quote-symbol-right { font-size: 2em; line-height: 0; vertical-align: sub; margin-left: 5px; color: #a2a9b1; }
+.warning-message { background-color: #fff8e1; border: 1px solid #ffd54f; border-left: 4px solid #ff9800; padding: 1.5em; margin: 2em 0; border-radius: 3px; }
+.warning-icon { color: #ff9800; font-size: 2rem; margin-bottom: 0.5em; } .warning-message h2 { margin-top: 0; color: #e65100; border: none; font-size: 1.5rem; }
+.character-list { list-style-type: none; padding-left: 1.5em; } .character-list li { margin-bottom: 1em; padding-left: 0.5em; border-left: 3px solid #a2a9b1; } .character-name { font-weight: bold; color: #202122; }
+@media (max-width: 768px) { .content-box { float: none; width: 100%; margin: 1em 0; } .main-content { padding: 1em; } .container { padding: 0.5em; } }
+</style></head><body>
+<header class="header"><div class="logo-container" id="wiki-logo"><div class="logo"><img src="images/logo.png" alt="Логотип"></div><div class="logo-text">Орден Вики <span>Энциклопедия Ананаса</span></div></div></header>
+<div class="container"><main class="main-content"><header class="article-header"><h1>Ананас</h1></header>
+<div><div class="quote-box">
+                
+        <b>Создано с помощью <a href="creator.html">редактора</a></b></div></div><b>Анана́с хохла́тый</b>, или <b>Анана́с настоя́щий</b>, или <b>Анана́с крупнохохолко́вый</b> (лат. Ananas comosus) — многолетнее травянистое растение, вид рода Ананас (Ananas) семейства Бромелиевые (Bromeliaceae).<div><div class="content-box">
+                
+                <h2>Ананас</h2>
+                <div class="info-image">
+                    <img src="images/ananas.png" alt="Фото">
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Дата рождения:</div>
+                    <div class="info-value">По данным Википедии около 4 тысяч лет назад</div>
+                    
+                </div>
+                <div class="info-row">
+                <div class="info-label">Место рождения:</div>
+                <div class="info-value">Бассейн реки Параны</div>
+                
+            </div><div class="info-row">
+                <div class="info-label">Научная классификация:</div>
+                <div class="info-value"><b>Домен:</b>	Эукариоты</div><div class="info-value"><b>Царство:</b>	Растения</div><div class="info-value"><b>Порядок:</b>	Злакоцветные</div><div class="info-value"><b>Семейство:</b>	Бромелиевые</div><div class="info-value"><b>Род:</b>	Ананас</div><div class="info-value"><b>Вид:</b>	Ананас хохлатый</div>
+                
+            </div><div class="info-row">
+                <div class="info-label">Международное научное название:</div>
+                <div class="info-value">Ananas comosus&nbsp;</div>
+                
+            </div><div class="info-row">
+                <div class="info-label">Имя при рождении:</div>
+                <div class="info-value">Nanas (рус. превосходный вкус)</div>
+                
+            </div><div class="info-row">
+                <div class="info-label">Автограф:</div>
+                <div class="info-value"><div class="section-image" style="max-width:400px; margin:1em 0;">
+                                    
+                                    <img src="images/ananas_aft.png" alt="Роспись"></div></div>
+                
+            </div><div class="info-row">
+                <div class="info-label">Вступил в Орден:</div>
+                <div class="info-value">2 января 2025 года</div>
+                
+            </div>
+            </div>
+            <p>Ананас настоящий представлен в культуре многочисленным разнообразием сортов не только в Южной Америке, где растут представители рода Ананас, но и по всем тропическим странам земного шара.</p><h2>История</h2></div><div>Все культурные пищевые и десертные сорта ананасов относятся к виду Ананас крупнохохолковый (Ananas comosus). Он был одомашнен около 4 тысяч лет назад индейцами тупи-гуарани, жившими в бассейне Параны. Постепенно культура ананаса распространилась на всю тропическую Южную и Центральную Америку, причём были выведены бессемянные сорта. На Антильских островах, в частности, карибы использовали плоды ананаса в пищу, из ферментированного сока готовили напитки, а из волокон делали верёвки, тетивы для луков и одежду. Именно там с ананасом впервые познакомились европейцы: в ноябре 1493 года Христофор Колумб видел его на островах Гваделупа, Гаити и Ямайке, взяв образцы с собой в Испанию. Придворный историк Пьетро Мартире записал свидетельство короля Фердинанда, что «его вкус превосходит все прочие фрукты». Слово ananas происходит из языка тупи, в котором nana означало «отличный фрукт»; однако в некоторых европейских языках, включая английский, название ананаса связано с сосной, шишку которой несколько напоминает его плод. Отсюда, в частности, происходит название коктейля пинья колада.</div><div><br></div><div>Колониальные державы быстро разнесли саженцы ананаса по тропическим регионам мира: уже в XVI веке португальцы и испанцы рассадили его в своих колониях в Южной Америке, на Азорских островах, в Западной Африке, на Мадагаскаре, в Индии, Китае и Юго-Восточной Азии, включая Филиппины; несколько позже он появился в голландских колониях в Индонезии и Южной Африке.</div><div><br></div><div>В Полинезию ананас завезён был в конце XVIII века, и получил там широкое распространение. «Ананасов здесь такая бездна, — сообщает побывавший в 1835 году на Таити Чарльз Дарвин, — что их едят в таком же количестве и так же небрежно, как у нас репу. Они чрезвычайно сочны и даже, может быть вкуснее тех, которые выводятся в Англии; а это, кажется, лучший комплимент, который может быть сделан какому-нибудь плоду.»</div><div><br></div><div>На Ямайке из ананасового сока некоторое время производился ром. Однако морская перевозка плодов в Европу была трудной и ненадёжной, поэтому во второй половине XVII века ананасы начали выращивать в обогреваемых теплицах: первый известный урожай был получен в Нидерландах Агнетой Блок около 1687 года. Особенно успешно в этой области работал Питер де ла Кур ван дер Форт (1664—1739), в 1710 году построивший тепличный комплекс при своём доме в Лейдене и выращивавший там виноград, ананасы и другие экзотические фрукты. Свою продукцию он рассылал по аристократическим и монаршим домам всей Европы и сам принимал путешественников, делясь с желающими своей технологией. К 1720 году по его методу были выращены первые ананасы в Англии, к 1733 — во Франции. В 1717 году де ла Кура посетил Пётр I, и по его просьбе в 1721 году тот послал в Петербург чертежи теплиц и несколько ананасных растений.</div><div><br></div><div>Уже в 1730 году для московского дворца императрицы Анны Иоанновны были привезены 20 растений из петербургских оранжерей. В середине века их стал выращивать в своих теплицах граф П. И. Шувалов, а затем и многие другие дворяне. К 1793 году ананасы появились в свободной продаже в Москве; для более долгого хранения их даже стали солить в кадках. По данным шотландского ботаника и путешественника Дж. К. Лаудона, в Великобритании в начале XIX века выращивалось 24 сорта ананасов; по его же оценке, среди остальных стран наиболее активными в этом деле были садовники России, значительно менее — Франции, Германии и Италии.</div><div><br></div><div>В XVIII веке плод ананаса стал распространённым архитектурно-дизайнерским мотивом: в его форме выполнялись не только детали столбов, лестниц, предметы мебели и посуды, но даже завершения церковных башен и целые части зданий.</div><div><br></div><div>До начала XIX века для обогрева теплиц обычно применялись навоз и мочёная дубовая кора. В 1820 году в Петербурге была построена по проекту К. А. Тона ананасная оранжерея с паровым отоплением, хотя оно оказалось сложным, трудоёмким и ненадёжным в работе. После отмены крепостного права культура ананасов в России начала приходить в упадок, тем более что развитие пароходного флота заметно облегчило доставку плодов из тропических регионов. Но и в конце XIX — начале XX века существовало их промышленное выращивание в ряде губерний (в целом, в тепличных или комнатных условиях в природно-климатических условиях средних широт возможно выращивание плодов массой 500-880 грамм, которые созревают через шесть месяцев после цветения).</div><div><br></div><div>Во второй половине XIX века ананасы в Европу поставлялись в основном с Азорских островов, а рынок США обеспечивался Флоридой и островами Карибского бассейна. В начале XX века на Гавайях началось широкомасштабное производство консервированных ананасов и ананасового сока, чему поспособствовало изобретение «машины Джинака» для чистки и нарезки плодов. В 1922 году владелец технологии Джеймс Доул[англ.] купил целый остров Ланаи и превратил его в крупнейшую ананасовую плантацию. С 1930-х годов Гавайи стали доминирующим в мире производителем, работая в основном для рынка США; другими крупными поставщиками стали Малайзия, Тайвань и Филиппины.</div><div><br></div><div>С 1960-х годов консервированные ананасы постепенно уступали долю рынка свежим и замороженным. В Бразилии, Индии и Китае развилось внутреннее потребление, место же основных экспортёров заняли Кот-д’Ивуар и Коста-Рика. В 1980-х резко выросло производство концентрированного сока. Благодаря внедрению с 1996 года нового культивара MD-2, отличающегося низкой кислотностью, рынок свежих ананасов США и Европы вырос в несколько раз. Общемировое производство с 1961 по 2013 годы увеличилось примерно с 4 млн т до 25 млн т.</div><h2>Ботаническое описание</h2><div>Тропическое многолетнее травянистое растение до 60 см высотой, с розеткой длинных, узких, грубых и в то же время сочных (суккулентных) листьев, зубчатых по краю.</div><div><br></div><div>Цветки расположены на цветоносном стебле на верхушке, густо по спирали, собраны в соцветие початок. Цветки обоеполые, зигоморфные, с тремя листочками околоцветника, одним пестиком и шестью тычинками. Все цветки срастаются между собою, свободными остаются только верхушки листочков околоцветника и кроющего листа. Тычинки в виде жгута обвивают по спирали столбик. Завязь состоит из трёх плодолистиков, трёхгнёздная, плацента с семяпочками расположена на перегородках по месту срастания плодолистиков.</div><div><br></div><div>В той фазе, когда ананас употребляется в качестве фрукта, он представляет собой крупное (до 2 кг), похожее на шишку хвойного дерева, соплодие золотисто-коричневого цвета, с пучком коротких листьев на верхушке, которые развиваются вследствие пролиферации — прорастания цветоноса сквозь соплодие. Соплодие состоит из довольно сочной, но грубоватой оси и отходящих от неё в бока сросшихся между собою чрезвычайно сочных и нежных плодов, несущих на своих вершинках остающиеся и грубеющие части цветка и кроющего листа. Стенки отдельного плода слагаются из плодолистиков и разросшихся листочков околоцветника, цветоложа и кроющего листа, иногда одно из трёх гнёзд недоразвито.</div><div><br></div><div>Семена у культурных сортов ананаса не развиваются. В гнёздах спелого плода легко можно обнаружить мелкие семяпочки, выделяющиеся на фоне стенок гнезда белым цветом. Все части соплодия пронизаны многочисленными проводящими пучками. В осевой части они идут в основном по вертикали, от оси пучки проходят в косом и косогоризонтальном направлении в плоды.</div><div><br></div><div>Незрелое соплодие ананаса обладает едкими свойствами, обжигает губы, раздражает стенки желудка, на кишечник действует как сильнодействующее слабительное. Зрелый плод теряет едкие свойства.</div><h3>Химический состав</h3><div>Мякоть ананаса на 86 % состоит из воды, в ней довольно много простых сахаров (12—15 мг %), представленных в основном сахарозой, органических кислот (0,7 мг %) — преимущественно лимонной, и до 50 мг % аскорбиновой кислоты. Кроме этого в ананасе присутствуют витамины B1, B2, B6, PP, провитамин A.</div><div><br></div><div>Мякоть плодов богата минеральными веществами — калием (до 320 мг %), железом, медью, цинком, кальцием, магнием, марганцем, йодом.</div><div><br></div><div>Соплодия ананаса также содержат бромелаин — комплекс протеолитических (то есть расщепляющих белки) ферментов высокой активности. Благодаря бромелаину улучшается усвоение организмом белковых веществ. Злоупотребление же ананасами приводит к повреждению слизистой оболочки рта[24]. В ананасе содержится 40 мг% витамина С (в листьях — до 120 мг%).</div><h2>Ананас в геральдике и искусстве</h2><div>Соплодия ананаса изображены на современных гербах Ямайки&nbsp;<img src="images/Jamaica.png" alt="Ямайка" class="flag" style="height: 20px; width: auto;">&nbsp;и Антигуа и Барбуды&nbsp;<img src="images/Antigua.png" alt="" class="flag" style="height: 20px; width: auto;">.</div><div><br></div><div>Ананас упоминается в произведении А. С. Пушкина "Евгений Онегин":</div><div><div class="quote-box">
+                
+        <strong>❝</strong>&nbsp;&nbsp;<span style="font-size: 1rem;">И Страсбурга пирог нетленный&nbsp;</span><span style="font-size: 1rem;">Меж сыром лимбургским живым&nbsp;</span><span style="font-size: 1rem;">И <b>ананасом золотым</b>.&nbsp;</span><strong style="font-size: 1rem;">❞</strong></div></div><div></div><div>В 1915 году в Петрограде поэт Игорь Северянин написал своё широко известное стихотворение «Ананасы в шампанском», которое начинается словами:</div><div><div class="quote-box">
+                
+        <strong>❝</strong>&nbsp;<b>Ананасы</b> в шампанском! <b>Ананасы</b> в шампанском!<span style="font-size: 1rem;">Удивительно вкусно, искристо и остро!&nbsp;</span><strong style="font-size: 1rem;">❞</strong></div></div><div>В 1917 году поэт Владимир Маяковский написал широко известную и цитируемую рифмовку:</div><div><div class="quote-box">
+                
+        <strong>❝</strong>&nbsp;Ешь <b>ананасы</b>, рябчиков жуй,<span style="font-size: 12.8px;"><b>&nbsp;</b></span><span style="font-size: 1rem;">День твой последний приходит, буржуй.&nbsp;</span><strong style="font-size: 1rem;">❞</strong></div><h2>Ананас в Ордене Торговцев&nbsp;</h2></div><div><span class="flag-container" style="display:inline-block; height:20px; vertical-align:middle; margin-right:5px;"><img src="images/ananas_orden.png" alt="" class="flag" style="height:20px; width:auto;"></span></div><div>Вступил в него 2 января 2025 года и находится в нем до сих пор.</div><div>Участвовал в войнах с <a href="war.html">Республикой</a> и <a href="uwu.html">Уву</a>.&nbsp;</div><div>Состоял во <a href="orden.html">всех Орденах</a> (Мегаколис, Китобоевский Орден, Новый Орден и т.д).</div><div>Во время деления Ордена выбрал сторону Шкафа, но по итогу из-за ухода Шкафа (4 февраля 2025) Ананас остался с <a href="kitoboy_orden.html">Китобоем</a>.&nbsp;</div><div>Подозревается <a href="shkaf.html">Шкафом</a> в шпионаже (это не правда).</div><h3>Является автором:</h3><div>● <a href="flag.html">флага и герба Ордена&nbsp;</a></div><div>●&nbsp;<a href="https://ahahachahahahahahaah.github.io/saf/Paintings/paint.html">пака Картины</a></div><div>●&nbsp;<a href="https://ahahachahahahahahaah.github.io/saf">сайта с картами</a></div><div>● книги про историю Ордена&nbsp;</div><div>● <a href="film.html">документального фильма про Орден&nbsp;</a></div><div>● <a href="index.html">Википедии Ордена</a></div>
+<div class="references"><h2>См. также</h2><ul>
+                    
+                <li><a href="orden.html">Орден Торговцев </a> </li><li><a href="film.html">Документальный фильм про Орден</a> </li><li><a href="shkaf.html">Шкаф Первый Великий </a> </li></ul></div></main></div>
+<script>
+function checkFileExists(url,cb){const xhr=new XMLHttpRequest();xhr.open('HEAD',url,true);xhr.onreadystatechange=function(){if(xhr.readyState===4)cb(xhr.status===0||xhr.status===200);};try{xhr.send();}catch(e){cb(false);}}
+document.addEventListener('DOMContentLoaded',function(){
+    document.getElementById('wiki-logo').addEventListener('click',function(){window.location.href='index.html';});
+    
+    // Ссылки
+    const checkLinks=document.querySelectorAll('a[href]');checkLinks.forEach(link=>{const href=link.getAttribute('href');if(!href.startsWith('http')&&!href.startsWith('#')&&!href.startsWith('mailto:')){link.addEventListener('click',function(e){e.preventDefault();const targetFile=this.getAttribute('href');checkFileExists(targetFile,function(exists){window.location.href=exists?targetFile:'develop.html';});});}});
+    
+    // СВОРАЧИВАНИЕ
+    const mainContent = document.querySelector('.main-content');
+    const allH2 = Array.from(mainContent.querySelectorAll('h2'));
+    const headers = allH2.filter(h2 => {
+        return !h2.closest('.content-box') && 
+               !h2.closest('.warning-message') && 
+               !h2.closest('.references');
+    });
+
+    headers.forEach(h2 => {
+        if(!h2.querySelector('.toggle-icon')){
+            // ИЗМЕНЕНИЕ 1: Иконка сразу смотрит вправо (chevron-right)
+            h2.innerHTML += ' <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>';
+        }
+        const contentDiv = document.createElement('div');
+        // ИЗМЕНЕНИЕ 2: Добавлен класс 'collapsed' по умолчанию
+        contentDiv.className = 'collapsible-content collapsed';
+        h2.parentNode.insertBefore(contentDiv, h2.nextSibling);
+
+        let next = contentDiv.nextSibling;
+        while(next) {
+            if(next.tagName === 'H2' && headers.includes(next)) break;
+            if(next.classList && next.classList.contains('references')) break;
+            let toMove = next;
+            next = next.nextSibling;
+            contentDiv.appendChild(toMove);
+        }
+
+        h2.addEventListener('click', function(){
+            const content = this.nextElementSibling; 
+            if(content && content.classList.contains('collapsible-content')){
+                const isCollapsed = content.classList.contains('collapsed');
+                const icon = this.querySelector('.toggle-icon i');
+                if(isCollapsed){
+                    content.classList.remove('collapsed');
+                    if(icon) icon.className = 'fas fa-chevron-down';
+                } else {
+                    content.classList.add('collapsed');
+                    if(icon) icon.className = 'fas fa-chevron-right';
+                }
+            }
         });
     });
-    </script>
-</body>
-</html>
+});
+
+</script></body></html>
