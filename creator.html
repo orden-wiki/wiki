@@ -11,6 +11,8 @@
         body { margin: 0; padding: 0; background-color: #f6f6f6; color: #202122; line-height: 1.6; }
         /* Цитата - ОТДЕЛЬНЫЙ стиль, не связанный с .note */
 .quote-box { font-size: 1rem; font-style: italic; color: #54595d; margin: 0.5em 0; padding: 0.5em; background-color: #f8f9fa; border-left: 3px solid #a2a9b1; }
+.warning-quote { font-size: 1rem; color: #721c24; margin: 1em 0; padding: 1em 1.5em 1em 3.5em; background-color: #f8d7da; border-left: 4px solid #dc3545; position: relative;line-height: 1.6; }
+.warning-icon-left { position: absolute; left: 0.4em; top: 50%; transform: translateY(-50%); color: #dc3545; font-size: 2rem; }
         /* Стили ссылок и заголовков */
         a { color: #3366cc; text-decoration: none; cursor: pointer; }
         .header { background-color: #f8f9fa; border-bottom: 1px solid #a2a9b1; padding: 0.5em 1em; display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; }
@@ -418,14 +420,15 @@
 }
 
         function insertWarning() {
-            insertHTMLAtCursor(`
-            <div class="warning-message">
-                <div class="editor-block-delete" contenteditable="false" onclick="this.parentElement.remove()" title="Удалить предупреждение"><i class="fas fa-trash"></i></div>
-                
-                <h2 contenteditable="true">Заголовок предупреждения</h2>
-                <p>Текст предупреждения...</p>
-            </div><p><br></p>`);
-        }
+    insertHTMLAtCursor(`
+    <div class="warning-quote">
+        <div class="editor-block-delete" contenteditable="false" onclick="this.parentElement.remove()" title="Удалить предупреждение"><i class="fas fa-trash"></i></div>
+        <div class="warning-icon-left">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <strong>Внимание!</strong> Текст предупреждения. 
+    </div><p><br></p>`);
+}
 
         // --- КАРТИНКИ ---
         
@@ -651,11 +654,15 @@ h3 { font-size: 1.2rem; font-weight: bold; margin-top: 1.2em; margin-bottom: 0.5
 .section-image { width: 100%; max-width: 400px; margin: 1em 0; } .section-image img { width: 100%; height: auto; display: block; }
 .note { font-size: 0.8rem; font-style: italic; color: #54595d; margin: 0.5em 0; padding: 0.5em; background-color: #f8f9fa; border-left: 3px solid #a2a9b1; }
 .references { font-size: 0.875rem; margin-top: 2em; border-top: 1px solid #a2a9b1; padding-top: 1em; }
+.warning-quote { font-size: 1rem; color: #721c24; margin: 1em 0; padding: 1em 1.5em 1em 3.5em; background-color: #f8d7da; border-left: 4px solid #dc3545; position: relative;line-height: 1.6; }
+.warning-icon-left { position: absolute; left: 0.4em; top: 50%; transform: translateY(-50%); color: #dc3545; font-size: 2rem; }
 .references h2 { font-size: 1.2rem; cursor: default; } .references h2 .toggle-icon { display: none; }
 /* Новые стили блоков */
 .site-container { margin: 1em 0; border: 1px solid #a2a9b1; background-color: #f8f9fa; padding: 10px; } .site-container iframe { width: 100%; height: 400px; border: none; }
 .original-text { background-color: #f8f9fa; border: 1px solid #a2a9b1; padding: 1.5em; margin: 1.5em 0; border-radius: 3px; font-size: 0.95rem; line-height: 1.5; }
-.quote-box { font-size: 1rem; font-style: italic; color: #54595d; margin: 0.5em 0; padding: 0.5em; background-color: #f8f9fa; border-left: 3px solid #a2a9b1; }
+.quote-box { font-size: 1rem; color: #4a4a4a; margin: 1em 0; padding: 1em 2em; background-color: #fdfdfd; border-left: 4px solid #a2a9b1; }
+.quote-symbol-left { font-size: 2em; line-height: 0; vertical-align: sub; margin-right: 5px; color: #a2a9b1; }
+.quote-symbol-right { font-size: 2em; line-height: 0; vertical-align: sub; margin-left: 5px; color: #a2a9b1; }
 .warning-message { background-color: #fff8e1; border: 1px solid #ffd54f; border-left: 4px solid #ff9800; padding: 1.5em; margin: 2em 0; border-radius: 3px; }
 .warning-icon { color: #ff9800; font-size: 2rem; margin-bottom: 0.5em; } .warning-message h2 { margin-top: 0; color: #e65100; border: none; font-size: 1.5rem; }
 .character-list { list-style-type: none; padding-left: 1.5em; } .character-list li { margin-bottom: 1em; padding-left: 0.5em; border-left: 3px solid #a2a9b1; } .character-name { font-weight: bold; color: #202122; }
@@ -684,12 +691,10 @@ document.addEventListener('DOMContentLoaded',function(){
 
     headers.forEach(h2 => {
         if(!h2.querySelector('.toggle-icon')){
-            // ИЗМЕНЕНИЕ 1: Иконка сразу смотрит вправо (chevron-right)
-            h2.innerHTML += ' <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>';
+            h2.innerHTML += ' <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>';
         }
         const contentDiv = document.createElement('div');
-        // ИЗМЕНЕНИЕ 2: Добавлен класс 'collapsed' по умолчанию
-        contentDiv.className = 'collapsible-content collapsed';
+        contentDiv.className = 'collapsible-content';
         h2.parentNode.insertBefore(contentDiv, h2.nextSibling);
 
         let next = contentDiv.nextSibling;
