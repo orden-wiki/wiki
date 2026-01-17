@@ -672,6 +672,7 @@ h3 { font-size: 1.2rem; font-weight: bold; margin-top: 1.2em; margin-bottom: 0.5
 <div class="container"><main class="main-content"><header class="article-header"><h1>${title}</h1></header>
 ${contentHtml}
 <div class="references"><h2>См. также</h2><ul>${seeAlsoHtml}</ul></div></main></div>
+<script src="parrot.js"><\/script>
 <script>
 function checkFileExists(url,cb){const xhr=new XMLHttpRequest();xhr.open('HEAD',url,true);xhr.onreadystatechange=function(){if(xhr.readyState===4)cb(xhr.status===0||xhr.status===200);};try{xhr.send();}catch(e){cb(false);}}
 document.addEventListener('DOMContentLoaded',function(){
