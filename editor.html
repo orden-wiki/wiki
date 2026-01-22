@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактор статьи - Орден Вики</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- СТИЛИ СТАТЬИ (КАК В ОБРАЗЦЕ) --- */
+        * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+        body { margin: 0; padding: 0; background-color: #f6f6f6; color: #202122; line-height: 1.6; }
+        
+        .quote-box { font-size: 1rem; font-style: italic; color: #54595d; margin: 0.5em 0; padding: 0.5em; background-color: #f8f9fa; border-left: 3px solid #a2a9b1; }
+        .warning-quote { font-size: 1rem; color: #721c24; margin: 1em 0; padding: 1em 1.5em 1em 3.5em; background-color: #f8d7da; border-left: 4px solid #dc3545; position: relative;line-height: 1.6; }
+        .warning-icon-left { position: absolute; left: 0.4em; top: 50%; transform: translateY(-50%); color: #dc3545; font-size: 2rem; }
+        
+        a { color: #3366cc; text-decoration: none; cursor: pointer; }
+        .header { background-color: #f8f9fa; border-bottom: 1px solid #a2a9b1; padding: 0.5em 1em; display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; }
+        .logo-container { display: flex; align-items: center; }
+        .logo { width: 40px; height: 40px; margin-right: 10px; }
+        .logo img { width: 100%; height: 100%; object-fit: contain; }
+        .logo-text { font-size: 1.25rem; font-weight: bold; line-height: 1.2; }
+        .logo-text span { display: block; font-size: 0.75rem; font-weight: normal; }
+        
+        .container { display: flex; max-width: 1600px; margin: 0 auto; padding: 1em; }
+        .main-content { flex: 1; background-color: white; border: 1px solid #a2a9b1; padding: 1.5em 2.5em; max-width: 100%; min-height: 80vh; position: relative; }
+        
+        .article-header { border-bottom: 1px solid #a2a9b1; padding-bottom: 0.5em; margin-bottom: 1.5em; }
+        h1 { font-size: 1.875rem; font-weight: bold; margin: 0; padding: 0; line-height: 1.3; }
+        
+        .content-box { background-color: #f8f9fa; border: 1px solid #a2a9b1; padding: 1em; margin: 1em 0; float: right; width: 320px; margin-left: 1.5em; font-size: 0.875rem; clear: right; position: relative; }
+        .content-box h2 { font-size: 1rem; text-align: center; border-bottom: 1px solid #a2a9b1; margin-bottom: 0.5em; font-weight: bold; }
+        
+        .info-row { display: flex; margin-bottom: 0.3em; position: relative; }
+        .info-label { font-weight: bold; width: 40%; }
+        .info-value { width: 60%; }
+        
+        .info-image img, .section-image img { width: 100%; height: auto; display: block; cursor: pointer; transition: opacity 0.2s; }
+        .info-image img:hover, .section-image img:hover { opacity: 0.8; outline: 2px solid #3366cc; }
+        
+        .note { font-size: 0.8rem; font-style: italic; color: #54595d; margin: 0.5em 0; padding: 0.5em; background-color: #f8f9fa; border-left: 3px solid #a2a9b1; }
+        
+        h2 { font-size: 1.5rem; font-weight: normal; border-bottom: 1px solid #a2a9b1; padding-bottom: 0.3em; margin-top: 1.5em; }
+        h3 { font-size: 1.2rem; font-weight: bold; margin-top: 1.2em; }
+        
+        .section-image { position: relative; display: block; }
+        .site-container { margin: 1em 0; border: 1px solid #a2a9b1; background-color: #f8f9fa; padding: 10px; }
+        .site-container iframe { width: 100%; height: 250px; border: none; pointer-events: none; }
+        .original-text { background-color: #f8f9fa; border: 1px solid #a2a9b1; padding: 1.5em; margin: 1.5em 0; border-radius: 3px; font-size: 0.95rem; line-height: 1.5; position: relative; }
+        .warning-message { background-color: #fff8e1; border: 1px solid #ffd54f; border-left: 4px solid #ff9800; padding: 1.5em; margin: 2em 0; border-radius: 3px; position: relative; }
+        .warning-icon { color: #ff9800; font-size: 2rem; margin-bottom: 0.5em; }
+        .warning-message h2 { margin-top: 0; color: #e65100; border: none; font-size: 1.5rem; }
+        .character-list { list-style-type: none; padding-left: 1.5em; }
+        .character-list li { margin-bottom: 1em; padding-left: 0.5em; border-left: 3px solid #a2a9b1; }
+        .character-name { font-weight: bold; color: #202122; }
+
+        /* --- СТИЛИ ИНТЕРФЕЙСА РЕДАКТОРА --- */
+        .content-box, .section-image, .note, .character-list-container, .site-container, .original-text, .quote-box, .warning-message {
+            position: relative !important;
+        }
+
+        .editor-block-delete {
+            display: none; position: absolute; top: 0; right: 0;
+            background: #ff4444; color: white; width: 30px; height: 30px;
+            justify-content: center; align-items: center; cursor: pointer; z-index: 100;
+            border-bottom-left-radius: 5px; box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .content-box:hover .editor-block-delete,
+        .section-image:hover .editor-block-delete,
+        .note:hover .editor-block-delete,
+        .site-container:hover .editor-block-delete,
+        .original-text:hover .editor-block-delete,
+        .quote-box:hover .editor-block-delete,
+        .warning-message:hover .editor-block-delete { display: flex; }
+        
+        .editor-block-delete:hover { background: #cc0000; }
+        
+        .editor-btn-delete-row {
+            color: red; cursor: pointer; margin-left: 5px; font-weight: bold; display: flex; align-items: center;
+        }
+        .editor-btn-add-row {
+            margin-top: 10px; font-size: 0.8em; cursor: pointer; background: #eee; border: 1px solid #ccc; padding: 2px 5px;
+        }
+
+        #editor-toolbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 90px;
+            background: #2a2a2a; color: white; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 5px 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+        }
+        .tools-wrapper { display: flex; flex-direction: column; gap: 5px; }
+        .tools-group { display: flex; gap: 5px; align-items: center; }
+        .tool-btn {
+            background: #444; border: 1px solid #555; color: white;
+            width: 36px; height: 36px; border-radius: 4px; cursor: pointer;
+            font-size: 1rem; display: flex; align-items: center; justify-content: center;
+        }
+        .tool-btn:hover { background: #666; }
+        .save-group { display: flex; gap: 5px; align-items: center; position: absolute; right: 10px; top: 30px; }
+        
+        /* Скрываем инпут имени, так как оно задается при загрузке */
+        #filename-display { color: #aaa; margin-right: 10px; font-family: monospace; }
+        #save-btn { background: #3366cc; border: none; color: white; padding: 0 15px; height: 30px; border-radius: 3px; cursor: pointer; font-weight: bold; }
+
+        #editor-content { outline: none; min-height: 500px; padding-bottom: 100px; }
+        #article-title { border: 1px dashed #ccc; padding: 5px; min-height: 1.3em; }
+        
+        #floating-menu {
+            position: absolute; background: #222; padding: 4px; border-radius: 5px;
+            display: none; gap: 4px; z-index: 2000;
+        }
+        #floating-menu button {
+            background: transparent; border: 1px solid transparent; color: white;
+            padding: 4px 8px; cursor: pointer; border-radius: 3px; font-weight: bold;
+        }
+        #floating-menu button:hover { background: #444; border-color: #555; }
+
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 3000; justify-content: center; align-items: center;
+        }
+        .modal-content { background: white; padding: 20px; border-radius: 5px; width: 400px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 3px; }
+        .modal-buttons { text-align: right; margin-top: 20px; }
+        .ref-delete-btn { color: #ff4444; cursor: pointer; margin-left: 10px; font-size: 0.8em; }
+
+        /* STARTUP MODAL */
+        #startup-modal { display: flex; background: rgba(0,0,0,0.8); }
+        #startup-modal .modal-content { width: 500px; text-align: center; }
+        #startup-error { color: red; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="startup-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-top:0">Редактирование статьи</h2>
+            <p>Введите имя существующего файла HTML, который находится в той же папке.</p>
+            <div class="form-group">
+                <input type="text" id="startup-filename" placeholder="например: my_article.html">
+            </div>
+            <button onclick="loadArticleFile()" style="background:#3366cc; color:white; border:none; padding: 10px 20px; cursor: pointer; font-size: 1rem; border-radius: 3px;">Загрузить и редактировать</button>
+            <div id="startup-error"></div>
+        </div>
+    </div>
+
+    <div id="editor-toolbar">
+        <div class="tools-wrapper">
+            <div class="tools-group">
+                <button class="tool-btn" title="Примечание" onmousedown="event.preventDefault(); insertNote()"><i class="fas fa-sticky-note"></i></button>
+                <button class="tool-btn" title="Инфобокс" onmousedown="event.preventDefault(); insertInfobox()"><i class="fas fa-info-circle"></i></button>
+                <button class="tool-btn" title="Список персонажей" onmousedown="event.preventDefault(); insertList()"><i class="fas fa-list"></i></button>
+                <button class="tool-btn" title="Изображение" onmousedown="event.preventDefault(); openImageModal()"><i class="fas fa-image"></i></button>
+            </div>
+            <div class="tools-group">
+                <button class="tool-btn" title="Вставить карту/сайт" onmousedown="event.preventDefault(); insertMap()"><i class="fas fa-globe"></i></button>
+                <button class="tool-btn" title="Оригинальный текст" onmousedown="event.preventDefault(); insertOriginal()"><i class="fas fa-file-alt"></i></button>
+                <button class="tool-btn" title="Цитата" onmousedown="event.preventDefault(); insertQuote()"><i class="fas fa-quote-right"></i></button>
+                <button class="tool-btn" title="Предупреждение" onmousedown="event.preventDefault(); insertWarning()"><i class="fas fa-exclamation-triangle"></i></button>
+            </div>
+        </div>
+        
+        <div class="save-group">
+            <span id="filename-display"></span>
+            <button id="save-btn" onclick="saveArticle()"><i class="fa-solid fa-floppy-disk"></i></button>
+        </div>
+    </div>
+
+    <div style="height: 140px; width: 100%; clear: both;"></div>
+
+    <div class="container">
+        <main class="main-content">
+            <header class="header" style="margin: -1.5em -2.5em 1.5em -2.5em;">
+                <div class="logo-container">
+                    <div class="logo"><img src="images/logo.png" alt="Лого" onerror="this.src='https://via.placeholder.com/40'"></div>
+                    <div class="logo-text">Орден Вики <span>Энциклопедия Ананаса</span></div>
+                </div>
+            </header>
+
+            <header class="article-header">
+                <h1 id="article-title" contenteditable="true">Загрузка...</h1>
+            </header>
+            
+            <div id="editor-content" contenteditable="true"></div>
+
+            <div class="references">
+                <h2>
+                    См. также 
+                    <button onclick="addSeeAlsoItem()" class="tool-btn" style="display:inline-flex; width:24px; height:24px; font-size:0.8rem; margin-left:10px; background:#3366cc; border:none;" title="Добавить ссылку"><i class="fas fa-plus"></i></button>
+                </h2>
+                <ul id="see-also-list">
+                    </ul>
+            </div>
+        </main>
+    </div>
+
+    <div id="floating-menu">
+        <button onmousedown="event.preventDefault(); formatText('h2')">H2</button>
+        <button onmousedown="event.preventDefault(); formatText('h3')">H3</button>
+        <button onmousedown="event.preventDefault(); formatText('bold')"><i class="fas fa-bold"></i></button>
+        <button onmousedown="event.preventDefault(); formatText('italic')"><i class="fas fa-italic"></i></button>
+        <button onmousedown="event.preventDefault(); addLink()"><i class="fas fa-link"></i></button>
+        <button onmousedown="event.preventDefault(); formatText('p')">¶</button>
+    </div>
+
+    <div id="image-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title" style="margin-top:0">Вставка изображения</h3>
+            <div class="form-group">
+                <label>Тип:</label>
+                <select id="img-type">
+                    <option value="normal">Обычное изображение</option>
+                    <option value="flag">Флаг (маленький)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Источник:</label>
+                <select id="img-source" onchange="toggleUploadInputs()">
+                    <option value="upload">Загрузить с ПК</option>
+                    <option value="existing">Изображение с сервера</option>
+                </select>
+            </div>
+            <div class="form-group" id="input-upload">
+                <label>Файл:</label>
+                <input type="file" id="img-file-input" accept="image/*" onchange="fillFilenameFromUpload()">
+            </div>
+            <div class="form-group" id="input-filename-container">
+                <label id="filename-label">Сохранить как (images/...):</label>
+                <input type="text" id="img-name-input" placeholder="filename.png">
+            </div>
+            <div class="form-group">
+                <label>Подпись (Alt):</label>
+                <input type="text" id="img-alt-input">
+            </div>
+            <div class="modal-buttons">
+                <button onclick="closeImageModal()" style="background:#ddd; border:none;">Отмена</button>
+                <button onclick="confirmInsertImage()" style="background:#3366cc; color:white; border:none;">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ---
+        let currentFilename = "";
+        let lastRange = null; 
+        let currentEditingImage = null; 
+        const editorContent = document.getElementById('editor-content');
+        const floatingMenu = document.getElementById('floating-menu');
+
+        // --- ЛОГИКА ЗАГРУЗКИ (НОВАЯ) ---
+        
+        function loadArticleFile() {
+            const input = document.getElementById('startup-filename');
+            const errorDiv = document.getElementById('startup-error');
+            let fname = input.value.trim();
+            
+            if (!fname) {
+                errorDiv.innerText = "Введите имя файла!";
+                errorDiv.style.display = "block";
+                return;
+            }
+            if (!fname.endsWith('.html')) fname += '.html';
+
+            fetch(fname)
+                .then(response => {
+                    if (!response.ok) throw new Error("Файл не найден (404)");
+                    return response.text();
+                })
+                .then(html => {
+                    currentFilename = fname;
+                    document.getElementById('filename-display').innerText = fname;
+                    parseAndLoadHTML(html);
+                    document.getElementById('startup-modal').style.display = 'none';
+                    window.onbeforeunload = function() { return "Данные не сохранены."; };
+                })
+                .catch(err => {
+                    errorDiv.innerText = "Ошибка: " + err.message + ". Убедитесь, что запускаете редактор через локальный сервер (Live Server), а не просто как файл.";
+                    errorDiv.style.display = "block";
+                });
+        }
+
+        function parseAndLoadHTML(htmlText) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, 'text/html');
+
+            // 1. Заголовок
+            const titleEl = doc.querySelector('.article-header h1');
+            if (titleEl) {
+                document.getElementById('article-title').innerText = titleEl.innerText;
+            }
+
+            // 2. Ссылки "См. также"
+            const seeAlsoList = document.getElementById('see-also-list');
+            seeAlsoList.innerHTML = '';
+            const refs = doc.querySelectorAll('.references ul li');
+            refs.forEach(li => {
+                const a = li.querySelector('a');
+                if (a) {
+                    const newLi = document.createElement('li');
+                    newLi.innerHTML = `<a href="${a.getAttribute('href')}">${a.innerText}</a> <i class="fas fa-times ref-delete-btn" onclick="this.parentElement.remove()" title="Удалить"></i>`;
+                    seeAlsoList.appendChild(newLi);
+                }
+            });
+
+            // 3. Основной контент
+            // Находим все между header и references
+            const mainContentSrc = doc.querySelector('.main-content');
+            
+            // Удаляем header и references из источника, чтобы остался только контент
+            const headerSrc = mainContentSrc.querySelector('.article-header');
+            const refsSrc = mainContentSrc.querySelector('.references');
+            const scriptsSrc = doc.querySelectorAll('script'); // Удаляем скрипты (parrot.js и тд)
+            
+            if (headerSrc) headerSrc.remove();
+            if (refsSrc) refsSrc.remove();
+            
+            // Самое важное: UNWRAP (разворачивание) свернутых блоков
+            // В сохраненном файле контент внутри h2 спрятан в div.collapsible-content
+            const collapsibles = mainContentSrc.querySelectorAll('.collapsible-content');
+            collapsibles.forEach(div => {
+                // Переносим всех детей div-а перед ним (сразу после H2)
+                while (div.firstChild) {
+                    div.parentNode.insertBefore(div.firstChild, div);
+                }
+                div.remove();
+            });
+
+            // Удаляем иконки сворачивания из H2
+            const toggleIcons = mainContentSrc.querySelectorAll('.toggle-icon');
+            toggleIcons.forEach(icon => icon.remove());
+
+            // Вставляем чистый контент
+            editorContent.innerHTML = mainContentSrc.innerHTML;
+
+            // 4. ВОССТАНОВЛЕНИЕ ИНТЕРФЕЙСА (Добавляем кнопки удаления)
+            restoreEditorControls();
+        }
+
+        function restoreEditorControls() {
+            // Восстанавливаем кнопки удаления для блоков
+            const deleteBtnHtml = '<div class="editor-block-delete" contenteditable="false" onclick="this.parentElement.remove()" title="Удалить"><i class="fas fa-trash"></i></div>';
+            
+            // Для блоков типа content-box, note, warning, original-text, quote-box, site-container
+            const blocks = editorContent.querySelectorAll('.content-box, .note, .warning-quote, .original-text, .quote-box, .site-container, .section-image');
+            
+            blocks.forEach(block => {
+                if (!block.querySelector('.editor-block-delete')) {
+                    block.insertAdjacentHTML('afterbegin', deleteBtnHtml);
+                }
+            });
+
+            // Для списков
+            const lists = editorContent.querySelectorAll('ul.character-list');
+            lists.forEach(ul => {
+                // Оборачиваем список обратно в контейнер, если он потерялся, или добавляем кнопку к родителю
+                const wrapper = ul.parentElement;
+                if (!wrapper.querySelector('.editor-block-delete')) {
+                    wrapper.style.position = 'relative';
+                    wrapper.insertAdjacentHTML('afterbegin', deleteBtnHtml);
+                }
+            });
+
+            // Для строк инфобокса (кнопка удалить строку)
+            const infoRows = editorContent.querySelectorAll('.content-box .info-row');
+            infoRows.forEach(row => {
+                if (!row.querySelector('.editor-btn-delete-row')) {
+                    row.insertAdjacentHTML('beforeend', '<span class="editor-btn-delete-row" contenteditable="false" onclick="this.parentElement.remove()">x</span>');
+                }
+            });
+
+            // Для инфобокса (кнопка добавить строку)
+            const infoboxes = editorContent.querySelectorAll('.content-box');
+            infoboxes.forEach(box => {
+                if (!box.querySelector('.editor-btn-add-row')) {
+                    box.insertAdjacentHTML('beforeend', '<button class="editor-btn-add-row" contenteditable="false" onclick="addInfoboxRow(this)">[+] Добавить строку</button>');
+                }
+            });
+            
+            // Включаем указатели событий для iframe
+            const iframes = editorContent.querySelectorAll('iframe');
+            iframes.forEach(el => el.style.pointerEvents = 'none'); // В редакторе кликать нельзя
+        }
+
+        // --- УПРАВЛЕНИЕ КУРСОРОМ И МЕНЮ ---
+        document.addEventListener('selectionchange', () => {
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                if (editorContent.contains(range.commonAncestorContainer)) {
+                    lastRange = range.cloneRange();
+                    if (!selection.isCollapsed) {
+                        const rect = range.getBoundingClientRect();
+                        if (rect.top > 0) {
+                            floatingMenu.style.display = 'flex';
+                            floatingMenu.style.top = `${window.scrollY + rect.bottom + 10}px`;
+                            floatingMenu.style.left = `${rect.left}px`;
+                        }
+                    } else {
+                        floatingMenu.style.display = 'none';
+                    }
+                }
+            }
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'IMG' && editorContent.contains(e.target)) {
+                if (!e.target.closest('.flag-container')) {
+                     openImageModal(e.target);
+                }
+            }
+        });
+
+        function restoreSelection() {
+            editorContent.focus();
+            const selection = window.getSelection();
+            if (lastRange) {
+                selection.removeAllRanges();
+                selection.addRange(lastRange);
+            } else {
+                const range = document.createRange();
+                range.selectNodeContents(editorContent);
+                range.collapse(false);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                lastRange = range;
+            }
+        }
+
+        function insertHTMLAtCursor(html) {
+            restoreSelection();
+            document.execCommand('insertHTML', false, html);
+        }
+
+        // --- ФУНКЦИИ ВСТАВКИ (Такие же как в creator) ---
+        function addSeeAlsoItem() {
+            const text = prompt("Текст ссылки:", "Новая статья");
+            if (!text) return;
+            const url = prompt("URL ссылки:", "article.html");
+            if (!url) return;
+            const ul = document.getElementById('see-also-list');
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${url}">${text}</a> <i class="fas fa-times ref-delete-btn" onclick="this.parentElement.remove()" title="Удалить"></i>`;
+            ul.appendChild(li);
+        }
+
+        function insertNote() {
+            insertHTMLAtCursor(`<div class="note"><div class="editor-block-delete" contenteditable="false" onclick="this.parentElement.remove()" title="Удалить"><i class="fas fa-trash"></i></div><strong>Примечание:</strong> Текст примечания.</div><p><br></p>`);
+        }
+
+        function insertList() {
+            insertHTMLAtCursor(`<div style="position: relative; margin: 1em 0;"><div class="editor-block-delete" contenteditable="false" onclick="this.parentElement.remove()" title="Удалить список" style="top: -15px; right: -15px;"><i class="fas fa-trash"></i></div><ul class="character-list" style="list-style-type: none; padding-left: 1.5em;"><li style="margin-bottom: 1em; padding-left: 0.5em; border-left: 3px solid #a2a9b1;"><div class="character-name" style="font-weight: bold; color: #202122;">Имя 1</div><p style="margin: 0.5em 0 0 0;">Описание.</p></li></ul></div><p><br></p>`);
+        }
+
+        function insertInfobox() {
+            const html = `<div class="content-box"><div class="editor-block-delete" contenteditable="false" onclick="this.parentElement.remove()" title="Удалить"><i class="fas fa-trash"></i></div><h2 contenteditable="true">Заголовок</h2><div class="info-image"><img src="https://via.placeholder.com/300x200" alt="Фото"></div><div class="info-row"><div class="info-label" contenteditable="true">Поле:</div><div class="info-value" contenteditable="true">Значение</div><span class="editor-btn-delete-row" contenteditable="false" onclick="this.parentElement.remove()">x</span></div><button class="editor-btn-add-row" contenteditable="false" onclick="addInfoboxRow(this)">[+] Добавить строку</button></div><p><br></p>`;
+            insertHTMLAtCursor(html);
+        }
+
+        window.addInfoboxRow = function(btn) {
+            const newRow = document.createElement('div');
+            newRow.className = 'info-row';
+            newRow.innerHTML = `<div class="info-label" contenteditable="true">Поле:</div><div class="info-value" contenteditable="true">Значение</div><span class="editor-btn-delete-row" contenteditable="false" onclick="this.parentElement.remove()">x</span>`;
+            btn.parentNode.insertBefore(newRow, btn);
+        }
+
+        function insertMap() {
+            const url = prompt("Введите URL карты или сайта (iframe src):", "");
+            if (!url) return;
+            insertHTMLAtCursor(`<div class="site-container"><div class="editor-block-delete" contenteditable="false" onclick="this.parentElement.remove()" title="Удалить карту"><i class="fas fa-trash"></i></div><iframe src="${url}"></iframe></div><p><br></p>`);
+        }
+
+        function insertOriginal() {
+            insertHTMLAtCursor(`<div class="original-text"><div class="editor-block-delete" contenteditable="false" onclick="this.parentElement.remove()" title="Удалить блок"><i class="fas fa-trash"></i></div><h3>Заголовок оригинала</h3><p>Текст оригинальной статьи...</p></div><p><br></p>`);
+        }
+
+        function insertQuote() {
+            insertHTMLAtCursor(`<div class="quote-box"><div class="editor-block-delete" contenteditable="false" onclick="this.parentElement.remove()" title="Удалить"><i class="fas fa-trash"></i></div><strong>❝</strong> Текст цитаты. <strong>❞</strong></div><p><br></p>`);
+        }
+
+        function insertWarning() {
+            insertHTMLAtCursor(`<div class="warning-quote"><div class="editor-block-delete" contenteditable="false" onclick="this.parentElement.remove()" title="Удалить предупреждение"><i class="fas fa-trash"></i></div><div class="warning-icon-left"><i class="fa-solid fa-triangle-exclamation"></i></div><strong>Внимание!</strong> Текст предупреждения.</div><p><br></p>`);
+        }
+
+        // --- КАРТИНКИ ---
+        function openImageModal(existingImgElement = null) {
+            const modal = document.getElementById('image-modal');
+            const title = document.getElementById('modal-title');
+            document.getElementById('img-file-input').value = "";
+            
+            if (existingImgElement) {
+                currentEditingImage = existingImgElement;
+                title.innerText = "Изменить изображение";
+                document.getElementById('img-alt-input').value = existingImgElement.alt;
+                const storedName = existingImgElement.getAttribute('data-filename');
+                if (storedName) {
+                     document.getElementById('img-name-input').value = storedName;
+                     document.getElementById('img-source').value = "upload";
+                } else {
+                     const srcParts = existingImgElement.src.split('/');
+                     document.getElementById('img-name-input').value = srcParts[srcParts.length - 1];
+                     document.getElementById('img-source').value = "existing";
+                }
+            } else {
+                if (!lastRange && window.getSelection().rangeCount > 0) {
+                   lastRange = window.getSelection().getRangeAt(0).cloneRange();
+                }
+                currentEditingImage = null;
+                title.innerText = "Вставить новое изображение";
+                document.getElementById('img-alt-input').value = "";
+                document.getElementById('img-name-input').value = "";
+                document.getElementById('img-source').value = "upload";
+            }
+            toggleUploadInputs();
+            modal.style.display = 'flex';
+        }
+
+        function closeImageModal() {
+            document.getElementById('image-modal').style.display = 'none';
+            if (!currentEditingImage) restoreSelection();
+        }
+
+        function toggleUploadInputs() {
+            const type = document.getElementById('img-source').value;
+            const label = document.getElementById('filename-label');
+            if (type === 'upload') {
+                document.getElementById('input-upload').style.display = 'block';
+                label.innerText = "Будущее имя файла в папке images (напр. photo.png):";
+            } else {
+                document.getElementById('input-upload').style.display = 'none';
+                label.innerText = "Существующее имя файла (images/...):";
+            }
+        }
+        
+        function fillFilenameFromUpload() {
+            const fileInput = document.getElementById('img-file-input');
+            const nameInput = document.getElementById('img-name-input');
+            if (fileInput.files && fileInput.files[0]) {
+                nameInput.value = fileInput.files[0].name;
+            }
+        }
+
+        function confirmInsertImage() {
+            const type = document.getElementById('img-type').value;
+            const source = document.getElementById('img-source').value;
+            const alt = document.getElementById('img-alt-input').value;
+            const filename = document.getElementById('img-name-input').value;
+
+            if (!filename) { alert("Укажите имя файла!"); return; }
+
+            const finalizeInsertion = (src, isUpload) => {
+                const dataAttr = isUpload ? `data-filename="${filename}"` : '';
+                if (currentEditingImage) {
+                    currentEditingImage.src = src;
+                    currentEditingImage.alt = alt;
+                    if (isUpload) currentEditingImage.setAttribute('data-filename', filename);
+                    else currentEditingImage.removeAttribute('data-filename');
+                    closeImageModal();
+                } else {
+                    closeImageModal(); 
+                    let html = '';
+                    if (type === 'flag') {
+                        html = `<span class="flag-container" style="display:inline-block; height:20px; vertical-align:middle; margin-right:5px;"><img src="${src}" alt="${alt}" ${dataAttr} class="flag" style="height:20px; width:auto;"></span> `;
+                    } else {
+                        html = `<div class="section-image" style="max-width:400px; margin:1em 0;"><div class="editor-block-delete" contenteditable="false" onclick="this.parentElement.remove()" title="Удалить фото"><i class="fas fa-trash"></i></div><img src="${src}" alt="${alt}" ${dataAttr} style="width:100%;"></div><p><br></p>`;
+                    }
+                    restoreSelection();
+                    document.execCommand('insertHTML', false, html);
+                }
+            };
+
+            if (source === 'upload') {
+                const fileInput = document.getElementById('img-file-input');
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => finalizeInsertion(e.target.result, true);
+                    reader.readAsDataURL(fileInput.files[0]);
+                } else if (currentEditingImage && currentEditingImage.src.startsWith('data:')) {
+                    finalizeInsertion(currentEditingImage.src, true);
+                } else {
+                    alert("Выберите файл!");
+                }
+            } else {
+                finalizeInsertion('images/' + filename, false);
+            }
+        }
+
+        function formatText(cmd) {
+            if (cmd === 'h2' || cmd === 'h3' || cmd === 'p') {
+                document.execCommand('formatBlock', false, '<' + cmd + '>');
+            } else {
+                document.execCommand(cmd, false, null);
+            }
+        }
+        
+        function addLink() {
+            const url = prompt("URL:", "http://");
+            if(url) document.execCommand('createLink', false, url);
+        }
+
+        // --- СОХРАНЕНИЕ ---
+        function saveArticle() {
+            if (!currentFilename) { alert("Ошибка имени файла"); return; }
+            
+            const title = document.getElementById('article-title').innerText;
+            const contentClone = editorContent.cloneNode(true);
+            const seeAlsoClone = document.getElementById('see-also-list').cloneNode(true);
+
+            // ОЧИСТКА ОТ СЛУЖЕБНЫХ КНОПОК
+            const buttons = contentClone.querySelectorAll('.editor-btn-add-row, .editor-btn-delete-row, .editor-block-delete');
+            buttons.forEach(b => b.remove());
+            const refButtons = seeAlsoClone.querySelectorAll('.ref-delete-btn');
+            refButtons.forEach(b => b.remove());
+
+            // ОБРАБОТКА ИЗОБРАЖЕНИЙ
+            const loadedImagesList = [];
+            const images = contentClone.querySelectorAll('img[data-filename]');
+            images.forEach(img => {
+                const targetName = img.getAttribute('data-filename');
+                loadedImagesList.push(targetName);
+                img.src = 'images/' + targetName;
+                img.removeAttribute('data-filename');
+            });
+
+            // Убираем contenteditable и pointer-events
+            const editables = contentClone.querySelectorAll('[contenteditable]');
+            editables.forEach(el => el.removeAttribute('contenteditable'));
+            const iframes = contentClone.querySelectorAll('iframe');
+            iframes.forEach(el => el.style.pointerEvents = 'auto');
+
+            const contentHtml = contentClone.innerHTML;
+            const seeAlsoHtml = seeAlsoClone.innerHTML;
+            
+            let imagesComment = "";
+            if (loadedImagesList.length > 0) imagesComment = `\n`;
+
+            const fullHTML = `${imagesComment}<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${title} - Орден Вики</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><style>
+* { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+body { margin: 0; padding: 0; background-color: #f6f6f6; color: #202122; line-height: 1.6; }
+a { color: #3366cc; text-decoration: none; } a:hover { text-decoration: underline; }
+.header { background-color: #f8f9fa; border-bottom: 1px solid #a2a9b1; padding: 0.5em 1em; display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; }
+.logo-container { display: flex; align-items: center; cursor: pointer; }
+.logo { width: 40px; height: 40px; margin-right: 10px; } .logo img { width: 100%; height: 100%; object-fit: contain; }
+.logo-text { font-size: 1.25rem; font-weight: bold; line-height: 1.2; } .logo-text span { display: block; font-size: 0.75rem; font-weight: normal; }
+.container { display: flex; max-width: 1600px; margin: 0 auto; padding: 1em; }
+.main-content { flex: 1; background-color: white; border: 1px solid #a2a9b1; padding: 1.5em 2.5em; max-width: 100%; }
+.article-header { border-bottom: 1px solid #a2a9b1; padding-bottom: 0.5em; margin-bottom: 1.5em; }
+.article-header h1 { font-size: 1.875rem; font-weight: bold; margin: 0; padding: 0; line-height: 1.3; }
+.content-box { background-color: #f8f9fa; border: 1px solid #a2a9b1; padding: 1em; margin: 1em 0; float: right; width: 320px; margin-left: 1.5em; font-size: 0.875rem; }
+.content-box h2 { font-size: 1rem; font-weight: bold; text-align: center; margin: 0 0 0.5em 0; padding-bottom: 0.3em; border-bottom: 1px solid #a2a9b1; }
+.info-image { width: 100%; margin-bottom: 0.5em; } .info-image img { width: 100%; height: auto; display: block; }
+.info-row { display: flex; margin-bottom: 0.3em; } .info-label { font-weight: bold; width: 40%; } .info-value { width: 60%; }
+.flag-container { display: inline-block; vertical-align: middle; margin-right: 5px; height: 20px; } .flag { height: 20px; width: auto; }
+p { margin: 0.5em 0 1em 0; }
+h2 { font-size: 1.5rem; font-weight: normal; border-bottom: 1px solid #a2a9b1; padding-bottom: 0.3em; margin-top: 1.5em; margin-bottom: 0.7em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+h2 .toggle-icon { font-size: 1rem; color: #54595d; margin-left: 10px; }
+.collapsible-content { overflow: hidden; transition: max-height 0.3s ease-out; } .collapsed { max-height: 0 !important; }
+h3 { font-size: 1.2rem; font-weight: bold; margin-top: 1.2em; margin-bottom: 0.5em; }
+.section-image { width: 100%; max-width: 400px; margin: 1em 0; } .section-image img { width: 100%; height: auto; display: block; }
+.note { font-size: 0.8rem; font-style: italic; color: #54595d; margin: 0.5em 0; padding: 0.5em; background-color: #f8f9fa; border-left: 3px solid #a2a9b1; }
+.references { font-size: 0.875rem; margin-top: 2em; border-top: 1px solid #a2a9b1; padding-top: 1em; }
+.warning-quote { font-size: 1rem; color: #721c24; margin: 1em 0; padding: 1em 1.5em 1em 3.5em; background-color: #f8d7da; border-left: 4px solid #dc3545; position: relative;line-height: 1.6; }
+.warning-icon-left { position: absolute; left: 0.4em; top: 50%; transform: translateY(-50%); color: #dc3545; font-size: 2rem; }
+.references h2 { font-size: 1.2rem; cursor: default; } .references h2 .toggle-icon { display: none; }
+.site-container { margin: 1em 0; border: 1px solid #a2a9b1; background-color: #f8f9fa; padding: 10px; } .site-container iframe { width: 100%; height: 400px; border: none; }
+.original-text { background-color: #f8f9fa; border: 1px solid #a2a9b1; padding: 1.5em; margin: 1.5em 0; border-radius: 3px; font-size: 0.95rem; line-height: 1.5; }
+.quote-box { font-size: 1rem; color: #4a4a4a; margin: 1em 0; padding: 1em 2em; background-color: #fdfdfd; border-left: 4px solid #a2a9b1; }
+.quote-symbol-left { font-size: 2em; line-height: 0; vertical-align: sub; margin-right: 5px; color: #a2a9b1; }
+.quote-symbol-right { font-size: 2em; line-height: 0; vertical-align: sub; margin-left: 5px; color: #a2a9b1; }
+.warning-message { background-color: #fff8e1; border: 1px solid #ffd54f; border-left: 4px solid #ff9800; padding: 1.5em; margin: 2em 0; border-radius: 3px; }
+.warning-icon { color: #ff9800; font-size: 2rem; margin-bottom: 0.5em; } .warning-message h2 { margin-top: 0; color: #e65100; border: none; font-size: 1.5rem; }
+.character-list { list-style-type: none; padding-left: 1.5em; } .character-list li { margin-bottom: 1em; padding-left: 0.5em; border-left: 3px solid #a2a9b1; } .character-name { font-weight: bold; color: #202122; }
+@media (max-width: 768px) { .content-box { float: none; width: 100%; margin: 1em 0; } .main-content { padding: 1em; } .container { padding: 0.5em; } }
+</style></head><body>
+<header class="header"><div class="logo-container" id="wiki-logo"><div class="logo"><img src="images/logo.png" alt="Логотип"></div><div class="logo-text">Орден Вики <span>Энциклопедия Ананаса</span></div></div></header>
+<div class="container"><main class="main-content"><header class="article-header"><h1>${title}</h1></header>
+${contentHtml}
+<div class="references"><h2>См. также</h2><ul>${seeAlsoHtml}</ul></div></main></div>
+<script src="parrot.js"><\/script>
+<script>
+function checkFileExists(url,cb){const xhr=new XMLHttpRequest();xhr.open('HEAD',url,true);xhr.onreadystatechange=function(){if(xhr.readyState===4)cb(xhr.status===0||xhr.status===200);};try{xhr.send();}catch(e){cb(false);}}
+document.addEventListener('DOMContentLoaded',function(){
+    document.getElementById('wiki-logo').addEventListener('click',function(){window.location.href='index.html';});
+    const checkLinks=document.querySelectorAll('a[href]');checkLinks.forEach(link=>{const href=link.getAttribute('href');if(!href.startsWith('http')&&!href.startsWith('#')&&!href.startsWith('mailto:')){link.addEventListener('click',function(e){e.preventDefault();const targetFile=this.getAttribute('href');checkFileExists(targetFile,function(exists){window.location.href=exists?targetFile:'develop.html';});});}});
+    
+    // СВОРАЧИВАНИЕ
+    const mainContent = document.querySelector('.main-content');
+    const allH2 = Array.from(mainContent.querySelectorAll('h2'));
+    const headers = allH2.filter(h2 => {
+        return !h2.closest('.content-box') && !h2.closest('.warning-message') && !h2.closest('.references');
+    });
+
+    headers.forEach(h2 => {
+        if(!h2.querySelector('.toggle-icon')){ h2.innerHTML += ' <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>'; }
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'collapsible-content';
+        h2.parentNode.insertBefore(contentDiv, h2.nextSibling);
+
+        let next = contentDiv.nextSibling;
+        while(next) {
+            if(next.tagName === 'H2' && headers.includes(next)) break;
+            if(next.classList && next.classList.contains('references')) break;
+            let toMove = next;
+            next = next.nextSibling;
+            contentDiv.appendChild(toMove);
+        }
+
+        h2.addEventListener('click', function(){
+            const content = this.nextElementSibling; 
+            if(content && content.classList.contains('collapsible-content')){
+                const isCollapsed = content.classList.contains('collapsed');
+                const icon = this.querySelector('.toggle-icon i');
+                if(isCollapsed){ content.classList.remove('collapsed'); if(icon) icon.className = 'fas fa-chevron-down'; } 
+                else { content.classList.add('collapsed'); if(icon) icon.className = 'fas fa-chevron-right'; }
+            }
+        });
+    });
+});
+<\/script></body></html>`;
+
+            window.onbeforeunload = null;
+            const blob = new Blob([fullHTML], {type: "text/html"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = currentFilename; // Используем сохраненное имя
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => { window.onbeforeunload = function() { return "Данные не сохранены."; }; }, 1000);
+        }
+    </script>
+</body>
+</html>
