@@ -695,7 +695,7 @@ document.addEventListener('DOMContentLoaded',function(){
             h2.innerHTML += ' <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>';
         }
         const contentDiv = document.createElement('div');
-        contentDiv.className = 'collapsible-content';
+        contentDiv.className = 'collapsible-content collapsed';
         h2.parentNode.insertBefore(contentDiv, h2.nextSibling);
 
         let next = contentDiv.nextSibling;
