@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Министерство культуры Ордена Торговцев - Орден Вики</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><style>
+* { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+body { margin: 0; padding: 0; background-color: #f6f6f6; color: #202122; line-height: 1.6; }
+a { color: #3366cc; text-decoration: none; } a:hover { text-decoration: underline; }
+.header { background-color: #f8f9fa; border-bottom: 1px solid #a2a9b1; padding: 0.5em 1em; display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; }
+.logo-container { display: flex; align-items: center; cursor: pointer; }
+.logo { width: 40px; height: 40px; margin-right: 10px; } .logo img { width: 100%; height: 100%; object-fit: contain; }
+.logo-text { font-size: 1.25rem; font-weight: bold; line-height: 1.2; } .logo-text span { display: block; font-size: 0.75rem; font-weight: normal; }
+.container { display: flex; max-width: 1600px; margin: 0 auto; padding: 1em; }
+.main-content { flex: 1; background-color: white; border: 1px solid #a2a9b1; padding: 1.5em 2.5em; max-width: 100%; }
+.article-header { border-bottom: 1px solid #a2a9b1; padding-bottom: 0.5em; margin-bottom: 1.5em; }
+.article-header h1 { font-size: 1.875rem; font-weight: bold; margin: 0; padding: 0; line-height: 1.3; }
+.content-box { background-color: #f8f9fa; border: 1px solid #a2a9b1; padding: 1em; margin: 1em 0; float: right; width: 320px; margin-left: 1.5em; font-size: 0.875rem; }
+.content-box h2 { font-size: 1rem; font-weight: bold; text-align: center; margin: 0 0 0.5em 0; padding-bottom: 0.3em; border-bottom: 1px solid #a2a9b1; }
+.info-image { width: 100%; margin-bottom: 0.5em; } .info-image img { width: 100%; height: auto; display: block; }
+.info-row { display: flex; margin-bottom: 0.3em; } .info-label { font-weight: bold; width: 40%; } .info-value { width: 60%; }
+.flag-container { display: inline-block; vertical-align: middle; margin-right: 5px; height: 20px; } .flag { height: 20px; width: auto; }
+p { margin: 0.5em 0 1em 0; }
+h2 { font-size: 1.5rem; font-weight: normal; border-bottom: 1px solid #a2a9b1; padding-bottom: 0.3em; margin-top: 1.5em; margin-bottom: 0.7em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+h2 .toggle-icon { font-size: 1rem; color: #54595d; margin-left: 10px; }
+.collapsible-content { overflow: hidden; transition: max-height 0.3s ease-out; } .collapsed { max-height: 0 !important; }
+h3 { font-size: 1.2rem; font-weight: bold; margin-top: 1.2em; margin-bottom: 0.5em; }
+.section-image { width: 100%; max-width: 400px; margin: 1em 0; } .section-image img { width: 100%; height: auto; display: block; }
+.note { font-size: 0.8rem; font-style: italic; color: #54595d; margin: 0.5em 0; padding: 0.5em; background-color: #f8f9fa; border-left: 3px solid #a2a9b1; }
+.references { font-size: 0.875rem; margin-top: 2em; border-top: 1px solid #a2a9b1; padding-top: 1em; }
+.warning-quote { font-size: 1rem; color: #721c24; margin: 1em 0; padding: 1em 1.5em 1em 3.5em; background-color: #f8d7da; border-left: 4px solid #dc3545; position: relative;line-height: 1.6; }
+.warning-icon-left { position: absolute; left: 0.4em; top: 50%; transform: translateY(-50%); color: #dc3545; font-size: 2rem; }
+.references h2 { font-size: 1.2rem; cursor: default; } .references h2 .toggle-icon { display: none; }
+/* Новые стили блоков */
+.site-container { margin: 1em 0; border: 1px solid #a2a9b1; background-color: #f8f9fa; padding: 10px; } .site-container iframe { width: 100%; height: 400px; border: none; }
+.original-text { background-color: #f8f9fa; border: 1px solid #a2a9b1; padding: 1.5em; margin: 1.5em 0; border-radius: 3px; font-size: 0.95rem; line-height: 1.5; }
+.quote-box { font-size: 1rem; color: #4a4a4a; margin: 1em 0; padding: 1em 2em; background-color: #fdfdfd; border-left: 4px solid #a2a9b1; }
+.quote-symbol-left { font-size: 2em; line-height: 0; vertical-align: sub; margin-right: 5px; color: #a2a9b1; }
+.quote-symbol-right { font-size: 2em; line-height: 0; vertical-align: sub; margin-left: 5px; color: #a2a9b1; }
+.warning-message { background-color: #fff8e1; border: 1px solid #ffd54f; border-left: 4px solid #ff9800; padding: 1.5em; margin: 2em 0; border-radius: 3px; }
+.warning-icon { color: #ff9800; font-size: 2rem; margin-bottom: 0.5em; } .warning-message h2 { margin-top: 0; color: #e65100; border: none; font-size: 1.5rem; }
+.character-list { list-style-type: none; padding-left: 1.5em; } .character-list li { margin-bottom: 1em; padding-left: 0.5em; border-left: 3px solid #a2a9b1; } .character-name { font-weight: bold; color: #202122; }
+@media (max-width: 768px) { .content-box { float: none; width: 100%; margin: 1em 0; } .main-content { padding: 1em; } .container { padding: 0.5em; } }
+</style></head><body>
+<header class="header"><div class="logo-container" id="wiki-logo"><div class="logo"><img src="images/logo.png" alt="Логотип"></div><div class="logo-text">Орден Вики <span>Энциклопедия Ананаса</span></div></div></header>
+<div class="container"><main class="main-content"><header class="article-header"><h1>Министерство культуры Ордена Торговцев</h1></header>
+<p><b>Министерство культуры Ордена Торговцев (Минкультуры Ордена) </b>–<b>&nbsp;</b>орган исполнительной власти, осуществляющий функции по нормативно-правовому регулированию в сфере культуры, искусства, культурного наследия (в том числе археологического наследия) и кинематографии, а также по охране культурного наследия.</p><div class="content-box">
+                
+                <h2>Министерство культуры Ордена Торговцев</h2>
+                <div class="info-image">
+                    <img src="images/minkult.png" alt="Фото">
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Страна:</div>
+                    <div class="info-value"><img src="images/orden.png" alt="" class="flag" style="font-size: 0.875rem; height: 20px; width: auto;">&nbsp;<a href="orden.html">Орден Торговцев</a>&nbsp;</div>
+                    
+                </div>
+                <div class="info-row">
+                <div class="info-label">Юрисдикция:</div>
+                <div class="info-value"><a href="orden.html">Орден Торговцев&nbsp;</a></div>
+                
+            </div><div class="info-row">
+                <div class="info-label">Дата создания:</div>
+                <div class="info-value">4 января 2026 года</div>
+                
+            </div><div class="info-row">
+                <div class="info-label">Подчинено:</div>
+                <div class="info-value"><a href="shkaf.html">Шкаф Первый Великий</a>&nbsp;</div>
+                
+            </div><div class="info-row">
+                <div class="info-label">Министр:</div>
+                <div class="info-value"><a href="ananas.html">Ананас</a>&nbsp;</div>
+                
+            </div><div class="info-row">
+                <div class="info-label">Подведомственные&nbsp;<span style="font-size: 0.875rem;">органы:</span></div>
+                <div class="info-value"><a href="wiki.html">Орден Вики</a></div><div class="info-value"><a href="films.html">Orden Films</a></div>
+                
+            </div>
+            </div><p>
+            </p><h2>История</h2><div>29 декабря 2025 года Ананас создаёт "<a href="wiki.html">Орден Вики</a>"&nbsp;<img src="images/logo.png" alt="" class="flag" style="height: 20px; width: auto;">.</div><div>4 января 2026 года Ананас придумывает "Орденовское историко-культурное общество"&nbsp;<img src="images/minkult.png" alt="Фото" class="flag" style="height: 20px; width: auto;">.</div><div>16 января 2026 года Ананас создаёт "<a href="films.html">Orden Films</a>"&nbsp;<img src="images/films.png" alt="Фото" class="flag" style="height: 20px; width: auto;">.</div><div>1 февраля 2026 года Ананас берёт концепцию "Орденовского историко-культурного общества" и создаёт "Минкультуры Ордена"&nbsp;<img src="images/minkult.png" alt="Фото" class="flag" style="height: 20px; width: auto;">.</div><h2>Руководство</h2><div>Пока что всё держится на <a href="ananas.html">Ананасе</a> 🙏</div><h2>Подведомственные органы</h2><div><div style="position: relative; margin: 1em 0;">
+                
+                <ul class="character-list">
+                    <li>
+                        <div class="character-name"><a href="wiki.html">Орден Вики&nbsp;<img src="images/logo.png" alt="" class="flag" style="height: 20px; width: auto;"></a></div>
+                    </li>
+                    <li>
+                        <div class="character-name"><a href="films.html">Orden Films&nbsp;<img src="images/films.png" alt="Фото" class="flag" style="height: 20px; width: auto;"></a></div>
+                    </li>
+                </ul>
+            </div><h2>Ведомственные награды</h2><div>Награждение ведомственными наградами Министерства культуры Российской Федерации происходит за особые достижения (заслуги) в сфере культуры, искусства, истории, кинематографии и так далее.</div><h3>Список наград:</h3><p>• Респект от Шкафа</p><p>• Респект от Ананаса</p>
+<div class="references"><h2>См. также</h2><ul>
+                    
+                <li><a href="ananas.html">Ананас</a> </li><li><a href="wiki.html">Орден Вики</a> </li><li><a href="films.html">Orden Films </a> </li><li><a href="orden.html">Орден Торговцев </a> </li></ul></div></main></div>
+<script src="parrot.js"></script>
+<script>
+function checkFileExists(url,cb){const xhr=new XMLHttpRequest();xhr.open('HEAD',url,true);xhr.onreadystatechange=function(){if(xhr.readyState===4)cb(xhr.status===0||xhr.status===200);};try{xhr.send();}catch(e){cb(false);}}
+document.addEventListener('DOMContentLoaded',function(){
+    document.getElementById('wiki-logo').addEventListener('click',function(){window.location.href='index.html';});
+    
+    // Ссылки
+    const checkLinks=document.querySelectorAll('a[href]');checkLinks.forEach(link=>{const href=link.getAttribute('href');if(!href.startsWith('http')&&!href.startsWith('#')&&!href.startsWith('mailto:')){link.addEventListener('click',function(e){e.preventDefault();const targetFile=this.getAttribute('href');checkFileExists(targetFile,function(exists){window.location.href=exists?targetFile:'develop.html';});});}});
+    
+    // СВОРАЧИВАНИЕ
+    const mainContent = document.querySelector('.main-content');
+    const allH2 = Array.from(mainContent.querySelectorAll('h2'));
+    const headers = allH2.filter(h2 => {
+        return !h2.closest('.content-box') && 
+               !h2.closest('.warning-message') && 
+               !h2.closest('.references');
+    });
+
+    headers.forEach(h2 => {
+        if(!h2.querySelector('.toggle-icon')){
+            h2.innerHTML += ' <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>';
+        }
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'collapsible-content collapsed';
+        h2.parentNode.insertBefore(contentDiv, h2.nextSibling);
+
+        let next = contentDiv.nextSibling;
+        while(next) {
+            if(next.tagName === 'H2' && headers.includes(next)) break;
+            if(next.classList && next.classList.contains('references')) break;
+            let toMove = next;
+            next = next.nextSibling;
+            contentDiv.appendChild(toMove);
+        }
+
+        h2.addEventListener('click', function(){
+            const content = this.nextElementSibling; 
+            if(content && content.classList.contains('collapsible-content')){
+                const isCollapsed = content.classList.contains('collapsed');
+                const icon = this.querySelector('.toggle-icon i');
+                if(isCollapsed){
+                    content.classList.remove('collapsed');
+                    if(icon) icon.className = 'fas fa-chevron-down';
+                } else {
+                    content.classList.add('collapsed');
+                    if(icon) icon.className = 'fas fa-chevron-right';
+                }
+            }
+        });
+    });
+});
+</script></body></html>
